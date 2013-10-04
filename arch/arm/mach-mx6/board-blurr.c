@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 Freescale Semiconductor, Inc. All Rights Reserved.
+ * Copyright (C) 2013 EMSYM.com. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -228,12 +228,10 @@ static const struct esdhc_platform_data emsym_blurr_sd2_data __initconst = {
 };
 
 static const struct esdhc_platform_data emsym_blurr_sd3_data __initconst = {
-	.cd_gpio = BLURR_SD3_CD,
-	.wp_gpio = BLURR_SD3_WP,
 	.keep_power_at_suspend = 1,
-	.support_8bit = 1,
+	.support_8bit = 0,
 	.delay_line = 0,
-	.cd_type = ESDHC_CD_CONTROLLER,
+	.cd_type = ESDHC_CD_CONTROLLER,//ESDHC_CD_PERMANENT
 };
 
 static const struct esdhc_platform_data emsym_blurr_sd4_data __initconst = {

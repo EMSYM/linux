@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2013 Freescale Semiconductor, Inc. All Rights Reserved.
+ * Copyright (C) 2013 EMSYM.com, Inc. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -212,12 +212,6 @@ static iomux_v3_cfg_t emsym_blurr_pads[] = {
 	MX6Q_PAD_SD3_DAT1__USDHC3_DAT1_50MHZ,
 	MX6Q_PAD_SD3_DAT2__USDHC3_DAT2_50MHZ,
 	MX6Q_PAD_SD3_DAT3__USDHC3_DAT3_50MHZ,
-	MX6Q_PAD_SD3_DAT4__USDHC3_DAT4_50MHZ,
-	MX6Q_PAD_SD3_DAT5__USDHC3_DAT5_50MHZ,
-	MX6Q_PAD_SD3_DAT6__USDHC3_DAT6_50MHZ,
-	MX6Q_PAD_SD3_DAT7__USDHC3_DAT7_50MHZ,
-	MX6Q_PAD_NANDF_D0__GPIO_2_0,		/* SD3_CD */
-	MX6Q_PAD_NANDF_D1__GPIO_2_1,		/* SD3_WP */
 
 	/* USDHC4 */
 	MX6Q_PAD_SD4_CLK__USDHC4_CLK_50MHZ,
