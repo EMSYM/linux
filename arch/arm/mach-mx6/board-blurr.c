@@ -80,123 +80,123 @@
 #include "devices-imx6q.h"
 #include "crm_regs.h"
 #include "cpu_op-mx6.h"
-#include "board-mx6q_sabresd.h"
+#include "board-blurr.h"
 #include "board-mx6dl_sabresd.h"
 
-#define SABRESD_USR_DEF_GRN_LED	IMX_GPIO_NR(1, 1)
-#define SABRESD_USR_DEF_RED_LED	IMX_GPIO_NR(1, 2)
-#define SABRESD_VOLUME_UP	IMX_GPIO_NR(1, 4)
-#define SABRESD_VOLUME_DN	IMX_GPIO_NR(1, 5)
-#define SABRESD_MICROPHONE_DET	IMX_GPIO_NR(1, 9)
-#define SABRESD_CSI0_PWN	IMX_GPIO_NR(1, 16)
-#define SABRESD_CSI0_RST	IMX_GPIO_NR(1, 17)
-#define SABRESD_ACCL_INT	IMX_GPIO_NR(1, 18)
-#define SABRESD_MIPICSI_PWN	IMX_GPIO_NR(1, 19)
-#define SABRESD_MIPICSI_RST	IMX_GPIO_NR(1, 20)
-#define SABRESD_RGMII_RST	IMX_GPIO_NR(1, 25)
-#define SABRESD_RGMII_INT	IMX_GPIO_NR(1, 26)
-#define SABRESD_CHARGE_UOK_B	IMX_GPIO_NR(1, 27)
-#define SABRESD_USBH1_PWR_EN	IMX_GPIO_NR(1, 29)
-#define SABRESD_DISP0_PWR_EN	IMX_GPIO_NR(1, 30)
+#define BLURR_USR_DEF_GRN_LED	IMX_GPIO_NR(1, 1)
+#define BLURR_USR_DEF_RED_LED	IMX_GPIO_NR(1, 2)
+#define BLURR_VOLUME_UP	IMX_GPIO_NR(1, 4)
+#define BLURR_VOLUME_DN	IMX_GPIO_NR(1, 5)
+#define BLURR_MICROPHONE_DET	IMX_GPIO_NR(1, 9)
+#define BLURR_CSI0_PWN	IMX_GPIO_NR(1, 16)
+#define BLURR_CSI0_RST	IMX_GPIO_NR(1, 17)
+#define BLURR_ACCL_INT	IMX_GPIO_NR(1, 18)
+#define BLURR_MIPICSI_PWN	IMX_GPIO_NR(1, 19)
+#define BLURR_MIPICSI_RST	IMX_GPIO_NR(1, 20)
+#define BLURR_RGMII_RST	IMX_GPIO_NR(1, 25)
+#define BLURR_RGMII_INT	IMX_GPIO_NR(1, 26)
+#define BLURR_CHARGE_UOK_B	IMX_GPIO_NR(1, 27)
+#define BLURR_USBH1_PWR_EN	IMX_GPIO_NR(1, 29)
+#define BLURR_DISP0_PWR_EN	IMX_GPIO_NR(1, 30)
 
-#define SABRESD_SD3_CD		IMX_GPIO_NR(2, 0)
-#define SABRESD_SD3_WP		IMX_GPIO_NR(2, 1)
-#define SABRESD_SD2_CD		IMX_GPIO_NR(2, 2)
-#define SABRESD_SD2_WP		IMX_GPIO_NR(2, 3)
-#define SABRESD_CHARGE_DOK_B	IMX_GPIO_NR(2, 24)
-#define SABRESD_GPS_RESET	IMX_GPIO_NR(2, 28)
-#define SABRESD_SENSOR_EN	IMX_GPIO_NR(2, 31)
+#define BLURR_SD3_CD		IMX_GPIO_NR(2, 0)
+#define BLURR_SD3_WP		IMX_GPIO_NR(2, 1)
+#define BLURR_SD2_CD		IMX_GPIO_NR(2, 2)
+#define BLURR_SD2_WP		IMX_GPIO_NR(2, 3)
+#define BLURR_CHARGE_DOK_B	IMX_GPIO_NR(2, 24)
+#define BLURR_GPS_RESET	IMX_GPIO_NR(2, 28)
+#define BLURR_SENSOR_EN	IMX_GPIO_NR(2, 31)
 
-#define SABRESD_GPS_EN	IMX_GPIO_NR(3, 0)
-#define SABRESD_DISP0_RST_B	IMX_GPIO_NR(3, 8)
-#define SABRESD_ALS_INT		IMX_GPIO_NR(3, 9)
-#define SABRESD_CHARGE_CHG_2_B	IMX_GPIO_NR(3, 13)
-#define SABRESD_CHARGE_FLT_2_B	IMX_GPIO_NR(3, 14)
-#define SABRESD_BAR0_INT	IMX_GPIO_NR(3, 15)
-#define SABRESD_eCOMPASS_INT	IMX_GPIO_NR(3, 16)
-#define SABRESD_GPS_PPS		IMX_GPIO_NR(3, 18)
-#define SABRESD_PCIE_PWR_EN	IMX_GPIO_NR(3, 19)
-#define SABRESD_USB_OTG_PWR	IMX_GPIO_NR(3, 22)
-#define SABRESD_USB_H1_PWR	IMX_GPIO_NR(1, 29)
-#define SABRESD_CHARGE_CHG_1_B	IMX_GPIO_NR(3, 23)
-#define SABRESD_TS_INT		IMX_GPIO_NR(3, 26)
-#define SABRESD_DISP0_RD	IMX_GPIO_NR(3, 28)
-#define SABRESD_POWER_OFF	IMX_GPIO_NR(3, 29)
+#define BLURR_GPS_EN	IMX_GPIO_NR(3, 0)
+#define BLURR_DISP0_RST_B	IMX_GPIO_NR(3, 8)
+#define BLURR_ALS_INT		IMX_GPIO_NR(3, 9)
+#define BLURR_CHARGE_CHG_2_B	IMX_GPIO_NR(3, 13)
+#define BLURR_CHARGE_FLT_2_B	IMX_GPIO_NR(3, 14)
+#define BLURR_BAR0_INT	IMX_GPIO_NR(3, 15)
+#define BLURR_eCOMPASS_INT	IMX_GPIO_NR(3, 16)
+#define BLURR_GPS_PPS		IMX_GPIO_NR(3, 18)
+#define BLURR_PCIE_PWR_EN	IMX_GPIO_NR(3, 19)
+#define BLURR_USB_OTG_PWR	IMX_GPIO_NR(3, 22)
+#define BLURR_USB_H1_PWR	IMX_GPIO_NR(1, 29)
+#define BLURR_CHARGE_CHG_1_B	IMX_GPIO_NR(3, 23)
+#define BLURR_TS_INT		IMX_GPIO_NR(3, 26)
+#define BLURR_DISP0_RD	IMX_GPIO_NR(3, 28)
+#define BLURR_POWER_OFF	IMX_GPIO_NR(3, 29)
 
-#define SABRESD_CAN1_STBY	IMX_GPIO_NR(4, 5)
-#define SABRESD_ECSPI1_CS0  IMX_GPIO_NR(4, 9)
-#define SABRESD_CODEC_PWR_EN	IMX_GPIO_NR(4, 10)
-#define SABRESD_HDMI_CEC_IN	IMX_GPIO_NR(4, 11)
-#define SABRESD_PCIE_DIS_B	IMX_GPIO_NR(4, 14)
+#define BLURR_CAN1_STBY	IMX_GPIO_NR(4, 5)
+#define BLURR_ECSPI1_CS0  IMX_GPIO_NR(4, 9)
+#define BLURR_CODEC_PWR_EN	IMX_GPIO_NR(4, 10)
+#define BLURR_HDMI_CEC_IN	IMX_GPIO_NR(4, 11)
+#define BLURR_PCIE_DIS_B	IMX_GPIO_NR(4, 14)
 
-#define SABRESD_DI0_D0_CS	IMX_GPIO_NR(5, 0)
-#define SABRESD_CHARGE_FLT_1_B	IMX_GPIO_NR(5, 2)
-#define SABRESD_PCIE_WAKE_B	IMX_GPIO_NR(5, 20)
+#define BLURR_DI0_D0_CS	IMX_GPIO_NR(5, 0)
+#define BLURR_CHARGE_FLT_1_B	IMX_GPIO_NR(5, 2)
+#define BLURR_PCIE_WAKE_B	IMX_GPIO_NR(5, 20)
 
-#define SABRESD_CAP_TCH_INT1	IMX_GPIO_NR(6, 7)
-#define SABRESD_CAP_TCH_INT0	IMX_GPIO_NR(6, 8)
-#define SABRESD_DISP_RST_B	IMX_GPIO_NR(6, 11)
-#define SABRESD_DISP_PWR_EN	IMX_GPIO_NR(6, 14)
-#define SABRESD_CABC_EN0	IMX_GPIO_NR(6, 15)
-#define SABRESD_CABC_EN1	IMX_GPIO_NR(6, 16)
-#define SABRESD_AUX_3V15_EN	IMX_GPIO_NR(6, 9)
-#define SABRESD_DISP0_WR_REVB	IMX_GPIO_NR(6, 9)
-#define SABRESD_AUX_5V_EN	IMX_GPIO_NR(6, 10)
-#define SABRESD_DI1_D0_CS	IMX_GPIO_NR(6, 31)
+#define BLURR_CAP_TCH_INT1	IMX_GPIO_NR(6, 7)
+#define BLURR_CAP_TCH_INT0	IMX_GPIO_NR(6, 8)
+#define BLURR_DISP_RST_B	IMX_GPIO_NR(6, 11)
+#define BLURR_DISP_PWR_EN	IMX_GPIO_NR(6, 14)
+#define BLURR_CABC_EN0	IMX_GPIO_NR(6, 15)
+#define BLURR_CABC_EN1	IMX_GPIO_NR(6, 16)
+#define BLURR_AUX_3V15_EN	IMX_GPIO_NR(6, 9)
+#define BLURR_DISP0_WR_REVB	IMX_GPIO_NR(6, 9)
+#define BLURR_AUX_5V_EN	IMX_GPIO_NR(6, 10)
+#define BLURR_DI1_D0_CS	IMX_GPIO_NR(6, 31)
 
-#define SABRESD_HEADPHONE_DET	IMX_GPIO_NR(7, 8)
-#define SABRESD_PCIE_RST_B_REVB	IMX_GPIO_NR(7, 12)
-#define SABRESD_PMIC_INT_B	IMX_GPIO_NR(7, 13)
-#define SABRESD_PFUZE_INT	IMX_GPIO_NR(7, 13)
+#define BLURR_HEADPHONE_DET	IMX_GPIO_NR(7, 8)
+#define BLURR_PCIE_RST_B_REVB	IMX_GPIO_NR(7, 12)
+#define BLURR_PMIC_INT_B	IMX_GPIO_NR(7, 13)
+#define BLURR_PFUZE_INT	IMX_GPIO_NR(7, 13)
 
-#define SABRESD_EPDC_SDDO_0	IMX_GPIO_NR(2, 22)
-#define SABRESD_EPDC_SDDO_1	IMX_GPIO_NR(3, 10)
-#define SABRESD_EPDC_SDDO_2	IMX_GPIO_NR(3, 12)
-#define SABRESD_EPDC_SDDO_3	IMX_GPIO_NR(3, 11)
-#define SABRESD_EPDC_SDDO_4	IMX_GPIO_NR(2, 27)
-#define SABRESD_EPDC_SDDO_5	IMX_GPIO_NR(2, 30)
-#define SABRESD_EPDC_SDDO_6	IMX_GPIO_NR(2, 23)
-#define SABRESD_EPDC_SDDO_7	IMX_GPIO_NR(2, 26)
-#define SABRESD_EPDC_SDDO_8	IMX_GPIO_NR(2, 24)
-#define SABRESD_EPDC_SDDO_9	IMX_GPIO_NR(3, 15)
-#define SABRESD_EPDC_SDDO_10	IMX_GPIO_NR(3, 16)
-#define SABRESD_EPDC_SDDO_11	IMX_GPIO_NR(3, 23)
-#define SABRESD_EPDC_SDDO_12	IMX_GPIO_NR(3, 19)
-#define SABRESD_EPDC_SDDO_13	IMX_GPIO_NR(3, 13)
-#define SABRESD_EPDC_SDDO_14	IMX_GPIO_NR(3, 14)
-#define SABRESD_EPDC_SDDO_15	IMX_GPIO_NR(5, 2)
-#define SABRESD_EPDC_GDCLK	IMX_GPIO_NR(2, 17)
-#define SABRESD_EPDC_GDSP	IMX_GPIO_NR(2, 16)
-#define SABRESD_EPDC_GDOE	IMX_GPIO_NR(6, 6)
-#define SABRESD_EPDC_GDRL	IMX_GPIO_NR(5, 4)
-#define SABRESD_EPDC_SDCLK	IMX_GPIO_NR(3, 31)
-#define SABRESD_EPDC_SDOEZ	IMX_GPIO_NR(3, 30)
-#define SABRESD_EPDC_SDOED	IMX_GPIO_NR(3, 26)
-#define SABRESD_EPDC_SDOE	IMX_GPIO_NR(3, 27)
-#define SABRESD_EPDC_SDLE	IMX_GPIO_NR(3, 1)
-#define SABRESD_EPDC_SDCLKN	IMX_GPIO_NR(3, 0)
-#define SABRESD_EPDC_SDSHR	IMX_GPIO_NR(2, 29)
-#define SABRESD_EPDC_PWRCOM	IMX_GPIO_NR(2, 28)
-#define SABRESD_EPDC_PWRSTAT	IMX_GPIO_NR(2, 21)
-#define SABRESD_EPDC_PWRCTRL0	IMX_GPIO_NR(2, 20)
-#define SABRESD_EPDC_PWRCTRL1	IMX_GPIO_NR(2, 19)
-#define SABRESD_EPDC_PWRCTRL2	IMX_GPIO_NR(2, 18)
-#define SABRESD_EPDC_PWRCTRL3	IMX_GPIO_NR(3, 28)
-#define SABRESD_EPDC_BDR0	IMX_GPIO_NR(3, 2)
-#define SABRESD_EPDC_BDR1	IMX_GPIO_NR(3, 3)
-#define SABRESD_EPDC_SDCE0	IMX_GPIO_NR(3, 4)
-#define SABRESD_EPDC_SDCE1	IMX_GPIO_NR(3, 5)
-#define SABRESD_EPDC_SDCE2	IMX_GPIO_NR(3, 6)
-#define SABRESD_EPDC_SDCE3	IMX_GPIO_NR(3, 7)
-#define SABRESD_EPDC_SDCE4	IMX_GPIO_NR(3, 8)
-#define SABRESD_EPDC_PMIC_WAKE	IMX_GPIO_NR(3, 20)
-#define SABRESD_EPDC_PMIC_INT	IMX_GPIO_NR(2, 25)
-#define SABRESD_EPDC_VCOM	IMX_GPIO_NR(3, 17)
-#define SABRESD_CHARGE_NOW	IMX_GPIO_NR(1, 2)
-#define SABRESD_CHARGE_DONE	IMX_GPIO_NR(1, 1)
-#define SABRESD_ELAN_CE		IMX_GPIO_NR(2, 18)
-#define SABRESD_ELAN_RST	IMX_GPIO_NR(3, 8)
-#define SABRESD_ELAN_INT	IMX_GPIO_NR(3, 28)
+#define BLURR_EPDC_SDDO_0	IMX_GPIO_NR(2, 22)
+#define BLURR_EPDC_SDDO_1	IMX_GPIO_NR(3, 10)
+#define BLURR_EPDC_SDDO_2	IMX_GPIO_NR(3, 12)
+#define BLURR_EPDC_SDDO_3	IMX_GPIO_NR(3, 11)
+#define BLURR_EPDC_SDDO_4	IMX_GPIO_NR(2, 27)
+#define BLURR_EPDC_SDDO_5	IMX_GPIO_NR(2, 30)
+#define BLURR_EPDC_SDDO_6	IMX_GPIO_NR(2, 23)
+#define BLURR_EPDC_SDDO_7	IMX_GPIO_NR(2, 26)
+#define BLURR_EPDC_SDDO_8	IMX_GPIO_NR(2, 24)
+#define BLURR_EPDC_SDDO_9	IMX_GPIO_NR(3, 15)
+#define BLURR_EPDC_SDDO_10	IMX_GPIO_NR(3, 16)
+#define BLURR_EPDC_SDDO_11	IMX_GPIO_NR(3, 23)
+#define BLURR_EPDC_SDDO_12	IMX_GPIO_NR(3, 19)
+#define BLURR_EPDC_SDDO_13	IMX_GPIO_NR(3, 13)
+#define BLURR_EPDC_SDDO_14	IMX_GPIO_NR(3, 14)
+#define BLURR_EPDC_SDDO_15	IMX_GPIO_NR(5, 2)
+#define BLURR_EPDC_GDCLK	IMX_GPIO_NR(2, 17)
+#define BLURR_EPDC_GDSP	IMX_GPIO_NR(2, 16)
+#define BLURR_EPDC_GDOE	IMX_GPIO_NR(6, 6)
+#define BLURR_EPDC_GDRL	IMX_GPIO_NR(5, 4)
+#define BLURR_EPDC_SDCLK	IMX_GPIO_NR(3, 31)
+#define BLURR_EPDC_SDOEZ	IMX_GPIO_NR(3, 30)
+#define BLURR_EPDC_SDOED	IMX_GPIO_NR(3, 26)
+#define BLURR_EPDC_SDOE	IMX_GPIO_NR(3, 27)
+#define BLURR_EPDC_SDLE	IMX_GPIO_NR(3, 1)
+#define BLURR_EPDC_SDCLKN	IMX_GPIO_NR(3, 0)
+#define BLURR_EPDC_SDSHR	IMX_GPIO_NR(2, 29)
+#define BLURR_EPDC_PWRCOM	IMX_GPIO_NR(2, 28)
+#define BLURR_EPDC_PWRSTAT	IMX_GPIO_NR(2, 21)
+#define BLURR_EPDC_PWRCTRL0	IMX_GPIO_NR(2, 20)
+#define BLURR_EPDC_PWRCTRL1	IMX_GPIO_NR(2, 19)
+#define BLURR_EPDC_PWRCTRL2	IMX_GPIO_NR(2, 18)
+#define BLURR_EPDC_PWRCTRL3	IMX_GPIO_NR(3, 28)
+#define BLURR_EPDC_BDR0	IMX_GPIO_NR(3, 2)
+#define BLURR_EPDC_BDR1	IMX_GPIO_NR(3, 3)
+#define BLURR_EPDC_SDCE0	IMX_GPIO_NR(3, 4)
+#define BLURR_EPDC_SDCE1	IMX_GPIO_NR(3, 5)
+#define BLURR_EPDC_SDCE2	IMX_GPIO_NR(3, 6)
+#define BLURR_EPDC_SDCE3	IMX_GPIO_NR(3, 7)
+#define BLURR_EPDC_SDCE4	IMX_GPIO_NR(3, 8)
+#define BLURR_EPDC_PMIC_WAKE	IMX_GPIO_NR(3, 20)
+#define BLURR_EPDC_PMIC_INT	IMX_GPIO_NR(2, 25)
+#define BLURR_EPDC_VCOM	IMX_GPIO_NR(3, 17)
+#define BLURR_CHARGE_NOW	IMX_GPIO_NR(1, 2)
+#define BLURR_CHARGE_DONE	IMX_GPIO_NR(1, 1)
+#define BLURR_ELAN_CE		IMX_GPIO_NR(2, 18)
+#define BLURR_ELAN_RST	IMX_GPIO_NR(3, 8)
+#define BLURR_ELAN_INT	IMX_GPIO_NR(3, 28)
 
 #define MX6_ENET_IRQ		IMX_GPIO_NR(1, 6)
 #define IOMUX_OBSRV_MUX1_OFFSET	0x3c
@@ -218,25 +218,25 @@ extern bool enet_to_gpio_6;
 
 static int max17135_regulator_init(struct max17135 *max17135);
 
-static const struct esdhc_platform_data mx6q_sabresd_sd2_data __initconst = {
-	.cd_gpio = SABRESD_SD2_CD,
-	.wp_gpio = SABRESD_SD2_WP,
+static const struct esdhc_platform_data emsym_blurr_sd2_data __initconst = {
+	.cd_gpio = BLURR_SD2_CD,
+	.wp_gpio = BLURR_SD2_WP,
 	.keep_power_at_suspend = 1,
 	.support_8bit = 1,
 	.delay_line = 0,
 	.cd_type = ESDHC_CD_CONTROLLER,
 };
 
-static const struct esdhc_platform_data mx6q_sabresd_sd3_data __initconst = {
-	.cd_gpio = SABRESD_SD3_CD,
-	.wp_gpio = SABRESD_SD3_WP,
+static const struct esdhc_platform_data emsym_blurr_sd3_data __initconst = {
+	.cd_gpio = BLURR_SD3_CD,
+	.wp_gpio = BLURR_SD3_WP,
 	.keep_power_at_suspend = 1,
 	.support_8bit = 1,
 	.delay_line = 0,
 	.cd_type = ESDHC_CD_CONTROLLER,
 };
 
-static const struct esdhc_platform_data mx6q_sabresd_sd4_data __initconst = {
+static const struct esdhc_platform_data emsym_blurr_sd4_data __initconst = {
 	.always_present = 1,
 	.keep_power_at_suspend = 1,
 	.support_8bit = 1,
@@ -245,17 +245,17 @@ static const struct esdhc_platform_data mx6q_sabresd_sd4_data __initconst = {
 };
 
 static const struct anatop_thermal_platform_data
-	mx6q_sabresd_anatop_thermal_data __initconst = {
+	emsym_blurr_anatop_thermal_data __initconst = {
 		.name = "anatop_thermal",
 };
 
-static inline void mx6q_sabresd_init_uart(void)
+static inline void emsym_blurr_init_uart(void)
 {
 	imx6q_add_imx_uart(2, NULL);
 	imx6q_add_imx_uart(0, NULL);
 }
 
-static int mx6q_sabresd_fec_phy_init(struct phy_device *phydev)
+static int emsym_blurr_fec_phy_init(struct phy_device *phydev)
 {
 	unsigned short val;
 
@@ -295,22 +295,22 @@ static int mx6q_sabresd_fec_phy_init(struct phy_device *phydev)
 }
 
 static struct fec_platform_data fec_data __initdata = {
-	.init = mx6q_sabresd_fec_phy_init,
+	.init = emsym_blurr_fec_phy_init,
 	.phy = PHY_INTERFACE_MODE_RGMII,
 	.gpio_irq = MX6_ENET_IRQ,
 };
 
-static int mx6q_sabresd_spi_cs[] = {
-	SABRESD_ECSPI1_CS0,
+static int emsym_blurr_spi_cs[] = {
+	BLURR_ECSPI1_CS0,
 };
 
-static const struct spi_imx_master mx6q_sabresd_spi_data __initconst = {
-	.chipselect     = mx6q_sabresd_spi_cs,
-	.num_chipselect = ARRAY_SIZE(mx6q_sabresd_spi_cs),
+static const struct spi_imx_master emsym_blurr_spi_data __initconst = {
+	.chipselect     = emsym_blurr_spi_cs,
+	.num_chipselect = ARRAY_SIZE(emsym_blurr_spi_cs),
 };
 
 #if defined(CONFIG_MTD_M25P80) || defined(CONFIG_MTD_M25P80_MODULE)
-static struct mtd_partition imx6_sabresd_spi_nor_partitions[] = {
+static struct mtd_partition emsym_blurr_spi_nor_partitions[] = {
 	{
 	 .name = "bootloader",
 	 .offset = 0,
@@ -323,37 +323,37 @@ static struct mtd_partition imx6_sabresd_spi_nor_partitions[] = {
 	},
 };
 
-static struct flash_platform_data imx6_sabresd__spi_flash_data = {
+static struct flash_platform_data emsym_blurr__spi_flash_data = {
 	.name = "m25p80",
-	.parts = imx6_sabresd_spi_nor_partitions,
-	.nr_parts = ARRAY_SIZE(imx6_sabresd_spi_nor_partitions),
+	.parts = emsym_blurr_spi_nor_partitions,
+	.nr_parts = ARRAY_SIZE(emsym_blurr_spi_nor_partitions),
 	.type = "sst25vf016b",
 };
 #endif
 
-static struct spi_board_info imx6_sabresd_spi_nor_device[] __initdata = {
+static struct spi_board_info emsym_blurr_spi_nor_device[] __initdata = {
 #if defined(CONFIG_MTD_M25P80)
 	{
 		.modalias = "m25p80",
 		.max_speed_hz = 20000000, /* max spi clock (SCK) speed in HZ */
 		.bus_num = 0,
 		.chip_select = 0,
-		.platform_data = &imx6_sabresd__spi_flash_data,
+		.platform_data = &emsym_blurr__spi_flash_data,
 	},
 #endif
 };
 
 static void spi_device_init(void)
 {
-	spi_register_board_info(imx6_sabresd_spi_nor_device,
-				ARRAY_SIZE(imx6_sabresd_spi_nor_device));
+	spi_register_board_info(emsym_blurr_spi_nor_device,
+				ARRAY_SIZE(emsym_blurr_spi_nor_device));
 }
 
-static struct imx_ssi_platform_data mx6_sabresd_ssi_pdata = {
+static struct imx_ssi_platform_data emsym_blurr_ssi_pdata = {
 	.flags = IMX_SSI_DMA | IMX_SSI_SYN,
 };
 
-static struct platform_device mx6_sabresd_audio_wm8958_device = {
+static struct platform_device emsym_blurr_audio_wm8958_device = {
 	.name = "imx-wm8958",
 };
 
@@ -361,7 +361,7 @@ static struct mxc_audio_platform_data wm8958_data = {
 	.ssi_num = 1,
 	.src_port = 2,
 	.ext_port = 3,
-	.hp_gpio = SABRESD_HEADPHONE_DET,
+	.hp_gpio = BLURR_HEADPHONE_DET,
 	.hp_active_low = 1,
 };
 
@@ -397,15 +397,15 @@ static int mxc_wm8958_init(void)
 	clk_set_rate(clko, rate);
 
 	/* enable wm8958 4.2v power supply */
-	gpio_request(SABRESD_CODEC_PWR_EN, "aud_4v2");
-	gpio_direction_output(SABRESD_CODEC_PWR_EN, 1);
+	gpio_request(BLURR_CODEC_PWR_EN, "aud_4v2");
+	gpio_direction_output(BLURR_CODEC_PWR_EN, 1);
 	msleep(1);
-	gpio_set_value(SABRESD_CODEC_PWR_EN, 1);
+	gpio_set_value(BLURR_CODEC_PWR_EN, 1);
 
 	return 0;
 }
 
-static struct platform_device mx6_sabresd_audio_wm8962_device = {
+static struct platform_device emsym_blurr_audio_wm8962_device = {
 	.name = "imx-wm8962",
 };
 
@@ -450,9 +450,9 @@ static struct mxc_audio_platform_data wm8962_data = {
 	.ssi_num = 1,
 	.src_port = 2,
 	.ext_port = 3,
-	.hp_gpio = SABRESD_HEADPHONE_DET,
+	.hp_gpio = BLURR_HEADPHONE_DET,
 	.hp_active_low = 1,
-	.mic_gpio = SABRESD_MICROPHONE_DET,
+	.mic_gpio = BLURR_MICROPHONE_DET,
 	.mic_active_low = 1,
 	.init = mxc_wm8962_init,
 	.clock_enable = wm8962_clk_enable,
@@ -476,7 +476,7 @@ static struct regulator_init_data sabresd_vwm8962_init = {
 static struct fixed_voltage_config sabresd_vwm8962_reg_config = {
 	.supply_name	= "SPKVDD",
 	.microvolts		= 4200000,
-	.gpio			= SABRESD_CODEC_PWR_EN,
+	.gpio			= BLURR_CODEC_PWR_EN,
 	.enable_high	= 1,
 	.enabled_at_boot = 1,
 	.init_data		= &sabresd_vwm8962_init,
@@ -493,9 +493,9 @@ static struct platform_device sabresd_vwm8962_reg_devices = {
 static void mx6q_csi0_cam_powerdown(int powerdown)
 {
 	if (powerdown)
-		gpio_set_value(SABRESD_CSI0_PWN, 1);
+		gpio_set_value(BLURR_CSI0_PWN, 1);
 	else
-		gpio_set_value(SABRESD_CSI0_PWN, 0);
+		gpio_set_value(BLURR_CSI0_PWN, 0);
 
 	msleep(2);
 }
@@ -503,27 +503,27 @@ static void mx6q_csi0_cam_powerdown(int powerdown)
 static void mx6q_csi0_io_init(void)
 {
 	if (cpu_is_mx6q())
-		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_csi0_sensor_pads,
-			ARRAY_SIZE(mx6q_sabresd_csi0_sensor_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_csi0_sensor_pads,
+			ARRAY_SIZE(emsym_blurr_csi0_sensor_pads));
 	else if (cpu_is_mx6dl())
 		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_csi0_sensor_pads,
 			ARRAY_SIZE(mx6dl_sabresd_csi0_sensor_pads));
 
 	/* Camera reset */
-	gpio_request(SABRESD_CSI0_RST, "cam-reset");
-	gpio_direction_output(SABRESD_CSI0_RST, 1);
+	gpio_request(BLURR_CSI0_RST, "cam-reset");
+	gpio_direction_output(BLURR_CSI0_RST, 1);
 
 	/* Camera power down */
-	gpio_request(SABRESD_CSI0_PWN, "cam-pwdn");
-	gpio_direction_output(SABRESD_CSI0_PWN, 1);
+	gpio_request(BLURR_CSI0_PWN, "cam-pwdn");
+	gpio_direction_output(BLURR_CSI0_PWN, 1);
 	msleep(5);
-	gpio_set_value(SABRESD_CSI0_PWN, 0);
+	gpio_set_value(BLURR_CSI0_PWN, 0);
 	msleep(5);
-	gpio_set_value(SABRESD_CSI0_RST, 0);
+	gpio_set_value(BLURR_CSI0_RST, 0);
 	msleep(1);
-	gpio_set_value(SABRESD_CSI0_RST, 1);
+	gpio_set_value(BLURR_CSI0_RST, 1);
 	msleep(5);
-	gpio_set_value(SABRESD_CSI0_PWN, 1);
+	gpio_set_value(BLURR_CSI0_PWN, 1);
 
 	/* For MX6Q:
 	 * GPR1 bit19 and bit20 meaning:
@@ -560,9 +560,9 @@ static struct fsl_mxc_camera_platform_data camera_data = {
 static void mx6q_mipi_powerdown(int powerdown)
 {
 	if (powerdown)
-		gpio_set_value(SABRESD_MIPICSI_PWN, 1);
+		gpio_set_value(BLURR_MIPICSI_PWN, 1);
 	else
-		gpio_set_value(SABRESD_MIPICSI_PWN, 0);
+		gpio_set_value(BLURR_MIPICSI_PWN, 0);
 
 	msleep(2);
 }
@@ -570,27 +570,27 @@ static void mx6q_mipi_powerdown(int powerdown)
 static void mx6q_mipi_sensor_io_init(void)
 {
 	if (cpu_is_mx6q())
-		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_mipi_sensor_pads,
-			ARRAY_SIZE(mx6q_sabresd_mipi_sensor_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mipi_sensor_pads,
+			ARRAY_SIZE(emsym_blurr_mipi_sensor_pads));
 	else if (cpu_is_mx6dl())
 		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_mipi_sensor_pads,
 			ARRAY_SIZE(mx6dl_sabresd_mipi_sensor_pads));
 
 	/* Camera reset */
-	gpio_request(SABRESD_MIPICSI_RST, "cam-reset");
-	gpio_direction_output(SABRESD_MIPICSI_RST, 1);
+	gpio_request(BLURR_MIPICSI_RST, "cam-reset");
+	gpio_direction_output(BLURR_MIPICSI_RST, 1);
 
 	/* Camera power down */
-	gpio_request(SABRESD_MIPICSI_PWN, "cam-pwdn");
-	gpio_direction_output(SABRESD_MIPICSI_PWN, 1);
+	gpio_request(BLURR_MIPICSI_PWN, "cam-pwdn");
+	gpio_direction_output(BLURR_MIPICSI_PWN, 1);
 	msleep(5);
-	gpio_set_value(SABRESD_MIPICSI_PWN, 0);
+	gpio_set_value(BLURR_MIPICSI_PWN, 0);
 	msleep(5);
-	gpio_set_value(SABRESD_MIPICSI_RST, 0);
+	gpio_set_value(BLURR_MIPICSI_RST, 0);
 	msleep(1);
-	gpio_set_value(SABRESD_MIPICSI_RST, 1);
+	gpio_set_value(BLURR_MIPICSI_RST, 1);
 	msleep(5);
-	gpio_set_value(SABRESD_MIPICSI_PWN, 1);
+	gpio_set_value(BLURR_MIPICSI_PWN, 1);
 
 	/*for mx6dl, mipi virtual channel 1 connect to csi 1*/
 	if (cpu_is_mx6dl())
@@ -709,11 +709,11 @@ static struct max17135_platform_data max17135_pdata __initdata = {
 	.vpos_pwrdn = 2,
 	.gvee_pwrdn = 1,
 	.vneg_pwrdn = 1,
-	.gpio_pmic_pwrgood = SABRESD_EPDC_PWRSTAT,
-	.gpio_pmic_vcom_ctrl = SABRESD_EPDC_VCOM,
-	.gpio_pmic_wakeup = SABRESD_EPDC_PMIC_WAKE,
-	.gpio_pmic_v3p3 = SABRESD_EPDC_PWRCTRL0,
-	.gpio_pmic_intr = SABRESD_EPDC_PMIC_INT,
+	.gpio_pmic_pwrgood = BLURR_EPDC_PWRSTAT,
+	.gpio_pmic_vcom_ctrl = BLURR_EPDC_VCOM,
+	.gpio_pmic_wakeup = BLURR_EPDC_PMIC_WAKE,
+	.gpio_pmic_v3p3 = BLURR_EPDC_PWRCTRL0,
+	.gpio_pmic_intr = BLURR_EPDC_PMIC_INT,
 	.regulator_init = max17135_init_data,
 	.init = max17135_regulator_init,
 };
@@ -785,7 +785,7 @@ static int __init max17135_regulator_init(struct max17135 *max17135)
 	return 0;
 }
 
-static struct imxi2c_platform_data mx6q_sabresd_i2c_data = {
+static struct imxi2c_platform_data emsym_blurr_i2c_data = {
 	.bitrate = 100000,
 };
 
@@ -817,12 +817,12 @@ static struct i2c_board_info mxc_i2c1_board_info[] __initdata = {
 	},
 	{
 		I2C_BOARD_INFO("egalax_ts", 0x4),
-		.irq = gpio_to_irq(SABRESD_CAP_TCH_INT0),
+		.irq = gpio_to_irq(BLURR_CAP_TCH_INT0),
 	},
 	{
 		I2C_BOARD_INFO("max11801", 0x48),
 		.platform_data = (void *)&max11801_mode,
-		.irq = gpio_to_irq(SABRESD_TS_INT),
+		.irq = gpio_to_irq(BLURR_TS_INT),
 	},
 };
 
@@ -833,20 +833,20 @@ static struct i2c_board_info mxc_i2c2_board_info[] __initdata = {
 	},
 	{
 		I2C_BOARD_INFO("egalax_ts", 0x4),
-		.irq = gpio_to_irq(SABRESD_CAP_TCH_INT1),
+		.irq = gpio_to_irq(BLURR_CAP_TCH_INT1),
 	},
 	{
 		I2C_BOARD_INFO("mag3110", 0x0e),
-		.irq = gpio_to_irq(SABRESD_eCOMPASS_INT),
+		.irq = gpio_to_irq(BLURR_eCOMPASS_INT),
 		.platform_data = (void *)&mag3110_position,
 	},
 	{
 		I2C_BOARD_INFO("isl29023", 0x44),
-		.irq  = gpio_to_irq(SABRESD_ALS_INT),
+		.irq  = gpio_to_irq(BLURR_ALS_INT),
 		.platform_data = &ls_data,
 	}, {
 		I2C_BOARD_INFO("elan-touch", 0x10),
-		.irq = gpio_to_irq(SABRESD_ELAN_INT),
+		.irq = gpio_to_irq(BLURR_ELAN_INT),
 	},
 };
 
@@ -855,52 +855,52 @@ static int epdc_get_pins(void)
 	int ret = 0;
 
 	/* Claim GPIOs for EPDC pins - used during power up/down */
-	ret |= gpio_request(SABRESD_EPDC_SDDO_0, "epdc_d0");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_1, "epdc_d1");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_2, "epdc_d2");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_3, "epdc_d3");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_4, "epdc_d4");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_5, "epdc_d5");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_6, "epdc_d6");
-	ret |= gpio_request(SABRESD_EPDC_SDDO_7, "epdc_d7");
-	ret |= gpio_request(SABRESD_EPDC_GDCLK, "epdc_gdclk");
-	ret |= gpio_request(SABRESD_EPDC_GDSP, "epdc_gdsp");
-	ret |= gpio_request(SABRESD_EPDC_GDOE, "epdc_gdoe");
-	ret |= gpio_request(SABRESD_EPDC_GDRL, "epdc_gdrl");
-	ret |= gpio_request(SABRESD_EPDC_SDCLK, "epdc_sdclk");
-	ret |= gpio_request(SABRESD_EPDC_SDOE, "epdc_sdoe");
-	ret |= gpio_request(SABRESD_EPDC_SDLE, "epdc_sdle");
-	ret |= gpio_request(SABRESD_EPDC_SDSHR, "epdc_sdshr");
-	ret |= gpio_request(SABRESD_EPDC_BDR0, "epdc_bdr0");
-	ret |= gpio_request(SABRESD_EPDC_SDCE0, "epdc_sdce0");
-	ret |= gpio_request(SABRESD_EPDC_SDCE1, "epdc_sdce1");
-	ret |= gpio_request(SABRESD_EPDC_SDCE2, "epdc_sdce2");
+	ret |= gpio_request(BLURR_EPDC_SDDO_0, "epdc_d0");
+	ret |= gpio_request(BLURR_EPDC_SDDO_1, "epdc_d1");
+	ret |= gpio_request(BLURR_EPDC_SDDO_2, "epdc_d2");
+	ret |= gpio_request(BLURR_EPDC_SDDO_3, "epdc_d3");
+	ret |= gpio_request(BLURR_EPDC_SDDO_4, "epdc_d4");
+	ret |= gpio_request(BLURR_EPDC_SDDO_5, "epdc_d5");
+	ret |= gpio_request(BLURR_EPDC_SDDO_6, "epdc_d6");
+	ret |= gpio_request(BLURR_EPDC_SDDO_7, "epdc_d7");
+	ret |= gpio_request(BLURR_EPDC_GDCLK, "epdc_gdclk");
+	ret |= gpio_request(BLURR_EPDC_GDSP, "epdc_gdsp");
+	ret |= gpio_request(BLURR_EPDC_GDOE, "epdc_gdoe");
+	ret |= gpio_request(BLURR_EPDC_GDRL, "epdc_gdrl");
+	ret |= gpio_request(BLURR_EPDC_SDCLK, "epdc_sdclk");
+	ret |= gpio_request(BLURR_EPDC_SDOE, "epdc_sdoe");
+	ret |= gpio_request(BLURR_EPDC_SDLE, "epdc_sdle");
+	ret |= gpio_request(BLURR_EPDC_SDSHR, "epdc_sdshr");
+	ret |= gpio_request(BLURR_EPDC_BDR0, "epdc_bdr0");
+	ret |= gpio_request(BLURR_EPDC_SDCE0, "epdc_sdce0");
+	ret |= gpio_request(BLURR_EPDC_SDCE1, "epdc_sdce1");
+	ret |= gpio_request(BLURR_EPDC_SDCE2, "epdc_sdce2");
 
 	return ret;
 }
 
 static void epdc_put_pins(void)
 {
-	gpio_free(SABRESD_EPDC_SDDO_0);
-	gpio_free(SABRESD_EPDC_SDDO_1);
-	gpio_free(SABRESD_EPDC_SDDO_2);
-	gpio_free(SABRESD_EPDC_SDDO_3);
-	gpio_free(SABRESD_EPDC_SDDO_4);
-	gpio_free(SABRESD_EPDC_SDDO_5);
-	gpio_free(SABRESD_EPDC_SDDO_6);
-	gpio_free(SABRESD_EPDC_SDDO_7);
-	gpio_free(SABRESD_EPDC_GDCLK);
-	gpio_free(SABRESD_EPDC_GDSP);
-	gpio_free(SABRESD_EPDC_GDOE);
-	gpio_free(SABRESD_EPDC_GDRL);
-	gpio_free(SABRESD_EPDC_SDCLK);
-	gpio_free(SABRESD_EPDC_SDOE);
-	gpio_free(SABRESD_EPDC_SDLE);
-	gpio_free(SABRESD_EPDC_SDSHR);
-	gpio_free(SABRESD_EPDC_BDR0);
-	gpio_free(SABRESD_EPDC_SDCE0);
-	gpio_free(SABRESD_EPDC_SDCE1);
-	gpio_free(SABRESD_EPDC_SDCE2);
+	gpio_free(BLURR_EPDC_SDDO_0);
+	gpio_free(BLURR_EPDC_SDDO_1);
+	gpio_free(BLURR_EPDC_SDDO_2);
+	gpio_free(BLURR_EPDC_SDDO_3);
+	gpio_free(BLURR_EPDC_SDDO_4);
+	gpio_free(BLURR_EPDC_SDDO_5);
+	gpio_free(BLURR_EPDC_SDDO_6);
+	gpio_free(BLURR_EPDC_SDDO_7);
+	gpio_free(BLURR_EPDC_GDCLK);
+	gpio_free(BLURR_EPDC_GDSP);
+	gpio_free(BLURR_EPDC_GDOE);
+	gpio_free(BLURR_EPDC_GDRL);
+	gpio_free(BLURR_EPDC_SDCLK);
+	gpio_free(BLURR_EPDC_SDOE);
+	gpio_free(BLURR_EPDC_SDLE);
+	gpio_free(BLURR_EPDC_SDSHR);
+	gpio_free(BLURR_EPDC_BDR0);
+	gpio_free(BLURR_EPDC_SDCE0);
+	gpio_free(BLURR_EPDC_SDCE1);
+	gpio_free(BLURR_EPDC_SDCE2);
 }
 
 static void epdc_enable_pins(void)
@@ -909,26 +909,26 @@ static void epdc_enable_pins(void)
 	mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_epdc_enable_pads, \
 				ARRAY_SIZE(mx6dl_sabresd_epdc_enable_pads));
 
-	gpio_direction_input(SABRESD_EPDC_SDDO_0);
-	gpio_direction_input(SABRESD_EPDC_SDDO_1);
-	gpio_direction_input(SABRESD_EPDC_SDDO_2);
-	gpio_direction_input(SABRESD_EPDC_SDDO_3);
-	gpio_direction_input(SABRESD_EPDC_SDDO_4);
-	gpio_direction_input(SABRESD_EPDC_SDDO_5);
-	gpio_direction_input(SABRESD_EPDC_SDDO_6);
-	gpio_direction_input(SABRESD_EPDC_SDDO_7);
-	gpio_direction_input(SABRESD_EPDC_GDCLK);
-	gpio_direction_input(SABRESD_EPDC_GDSP);
-	gpio_direction_input(SABRESD_EPDC_GDOE);
-	gpio_direction_input(SABRESD_EPDC_GDRL);
-	gpio_direction_input(SABRESD_EPDC_SDCLK);
-	gpio_direction_input(SABRESD_EPDC_SDOE);
-	gpio_direction_input(SABRESD_EPDC_SDLE);
-	gpio_direction_input(SABRESD_EPDC_SDSHR);
-	gpio_direction_input(SABRESD_EPDC_BDR0);
-	gpio_direction_input(SABRESD_EPDC_SDCE0);
-	gpio_direction_input(SABRESD_EPDC_SDCE1);
-	gpio_direction_input(SABRESD_EPDC_SDCE2);
+	gpio_direction_input(BLURR_EPDC_SDDO_0);
+	gpio_direction_input(BLURR_EPDC_SDDO_1);
+	gpio_direction_input(BLURR_EPDC_SDDO_2);
+	gpio_direction_input(BLURR_EPDC_SDDO_3);
+	gpio_direction_input(BLURR_EPDC_SDDO_4);
+	gpio_direction_input(BLURR_EPDC_SDDO_5);
+	gpio_direction_input(BLURR_EPDC_SDDO_6);
+	gpio_direction_input(BLURR_EPDC_SDDO_7);
+	gpio_direction_input(BLURR_EPDC_GDCLK);
+	gpio_direction_input(BLURR_EPDC_GDSP);
+	gpio_direction_input(BLURR_EPDC_GDOE);
+	gpio_direction_input(BLURR_EPDC_GDRL);
+	gpio_direction_input(BLURR_EPDC_SDCLK);
+	gpio_direction_input(BLURR_EPDC_SDOE);
+	gpio_direction_input(BLURR_EPDC_SDLE);
+	gpio_direction_input(BLURR_EPDC_SDSHR);
+	gpio_direction_input(BLURR_EPDC_BDR0);
+	gpio_direction_input(BLURR_EPDC_SDCE0);
+	gpio_direction_input(BLURR_EPDC_SDCE1);
+	gpio_direction_input(BLURR_EPDC_SDCE2);
 }
 
 static void epdc_disable_pins(void)
@@ -938,26 +938,26 @@ static void epdc_disable_pins(void)
 	mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_epdc_disable_pads, \
 				ARRAY_SIZE(mx6dl_sabresd_epdc_disable_pads));
 
-	gpio_direction_output(SABRESD_EPDC_SDDO_0, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_1, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_2, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_3, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_4, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_5, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_6, 0);
-	gpio_direction_output(SABRESD_EPDC_SDDO_7, 0);
-	gpio_direction_output(SABRESD_EPDC_GDCLK, 0);
-	gpio_direction_output(SABRESD_EPDC_GDSP, 0);
-	gpio_direction_output(SABRESD_EPDC_GDOE, 0);
-	gpio_direction_output(SABRESD_EPDC_GDRL, 0);
-	gpio_direction_output(SABRESD_EPDC_SDCLK, 0);
-	gpio_direction_output(SABRESD_EPDC_SDOE, 0);
-	gpio_direction_output(SABRESD_EPDC_SDLE, 0);
-	gpio_direction_output(SABRESD_EPDC_SDSHR, 0);
-	gpio_direction_output(SABRESD_EPDC_BDR0, 0);
-	gpio_direction_output(SABRESD_EPDC_SDCE0, 0);
-	gpio_direction_output(SABRESD_EPDC_SDCE1, 0);
-	gpio_direction_output(SABRESD_EPDC_SDCE2, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_0, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_1, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_2, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_3, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_4, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_5, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_6, 0);
+	gpio_direction_output(BLURR_EPDC_SDDO_7, 0);
+	gpio_direction_output(BLURR_EPDC_GDCLK, 0);
+	gpio_direction_output(BLURR_EPDC_GDSP, 0);
+	gpio_direction_output(BLURR_EPDC_GDOE, 0);
+	gpio_direction_output(BLURR_EPDC_GDRL, 0);
+	gpio_direction_output(BLURR_EPDC_SDCLK, 0);
+	gpio_direction_output(BLURR_EPDC_SDOE, 0);
+	gpio_direction_output(BLURR_EPDC_SDLE, 0);
+	gpio_direction_output(BLURR_EPDC_SDSHR, 0);
+	gpio_direction_output(BLURR_EPDC_BDR0, 0);
+	gpio_direction_output(BLURR_EPDC_SDCE0, 0);
+	gpio_direction_output(BLURR_EPDC_SDCE1, 0);
+	gpio_direction_output(BLURR_EPDC_SDCE2, 0);
 }
 
 static struct fb_videomode e60_v110_mode = {
@@ -1092,23 +1092,23 @@ static struct imx_epdc_fb_platform_data epdc_data = {
 	.disable_pins = epdc_disable_pins,
 };
 
-static void imx6q_sabresd_usbotg_vbus(bool on)
+static void emsym_blurr_usbotg_vbus(bool on)
 {
 	if (on)
-		gpio_set_value(SABRESD_USB_OTG_PWR, 1);
+		gpio_set_value(BLURR_USB_OTG_PWR, 1);
 	else
-		gpio_set_value(SABRESD_USB_OTG_PWR, 0);
+		gpio_set_value(BLURR_USB_OTG_PWR, 0);
 }
 
-static void imx6q_sabresd_host1_vbus(bool on)
+static void emsym_blurr_host1_vbus(bool on)
 {
 	if (on)
-		gpio_set_value(SABRESD_USB_H1_PWR, 1);
+		gpio_set_value(BLURR_USB_H1_PWR, 1);
 	else
-		gpio_set_value(SABRESD_USB_H1_PWR, 0);
+		gpio_set_value(BLURR_USB_H1_PWR, 0);
 }
 
-static void __init imx6q_sabresd_init_usb(void)
+static void __init emsym_blurr_init_usb(void)
 {
 	int ret = 0;
 
@@ -1116,33 +1116,33 @@ static void __init imx6q_sabresd_init_usb(void)
 	/* disable external charger detect,
 	 * or it will affect signal quality at dp .
 	 */
-	ret = gpio_request(SABRESD_USB_OTG_PWR, "usb-pwr");
+	ret = gpio_request(BLURR_USB_OTG_PWR, "usb-pwr");
 	if (ret) {
-		pr_err("failed to get GPIO SABRESD_USB_OTG_PWR: %d\n",
+		pr_err("failed to get GPIO BLURR_USB_OTG_PWR: %d\n",
 			ret);
 		return;
 	}
-	gpio_direction_output(SABRESD_USB_OTG_PWR, 0);
+	gpio_direction_output(BLURR_USB_OTG_PWR, 0);
 	/* keep USB host1 VBUS always on */
-	ret = gpio_request(SABRESD_USB_H1_PWR, "usb-h1-pwr");
+	ret = gpio_request(BLURR_USB_H1_PWR, "usb-h1-pwr");
 	if (ret) {
-		pr_err("failed to get GPIO SABRESD_USB_H1_PWR: %d\n",
+		pr_err("failed to get GPIO BLURR_USB_H1_PWR: %d\n",
 			ret);
 		return;
 	}
-	gpio_direction_output(SABRESD_USB_H1_PWR, 0);
+	gpio_direction_output(BLURR_USB_H1_PWR, 0);
 	if (board_is_mx6_reva())
 		mxc_iomux_set_gpr_register(1, 13, 1, 1);
 	else
 		mxc_iomux_set_gpr_register(1, 13, 1, 0);
 
-	mx6_set_otghost_vbus_func(imx6q_sabresd_usbotg_vbus);
-	mx6_set_host1_vbus_func(imx6q_sabresd_host1_vbus);
+	mx6_set_otghost_vbus_func(emsym_blurr_usbotg_vbus);
+	mx6_set_host1_vbus_func(emsym_blurr_host1_vbus);
 
 }
 
 /* HW Initialization, if return 0, initialization is successful. */
-static int mx6q_sabresd_sata_init(struct device *dev, void __iomem *addr)
+static int emsym_blurr_sata_init(struct device *dev, void __iomem *addr)
 {
 	u32 tmpdata;
 	int ret = 0;
@@ -1214,30 +1214,30 @@ put_sata_clk:
 }
 
 #ifdef CONFIG_SATA_AHCI_PLATFORM
-static void mx6q_sabresd_sata_exit(struct device *dev)
+static void emsym_blurr_sata_exit(struct device *dev)
 {
 	clk_disable(sata_clk);
 	clk_put(sata_clk);
 }
 
-static struct ahci_platform_data mx6q_sabresd_sata_data = {
-	.init = mx6q_sabresd_sata_init,
-	.exit = mx6q_sabresd_sata_exit,
+static struct ahci_platform_data emsym_blurr_sata_data = {
+	.init = emsym_blurr_sata_init,
+	.exit = emsym_blurr_sata_exit,
 };
 #endif
 
-static void mx6q_sabresd_flexcan0_switch(int enable)
+static void emsym_blurr_flexcan0_switch(int enable)
 {
 	if (enable) {
-		gpio_set_value(SABRESD_CAN1_STBY, 1);
+		gpio_set_value(BLURR_CAN1_STBY, 1);
 	} else {
-		gpio_set_value(SABRESD_CAN1_STBY, 0);
+		gpio_set_value(BLURR_CAN1_STBY, 0);
 	}
 }
 
 static const struct flexcan_platform_data
-	mx6q_sabresd_flexcan0_pdata __initconst = {
-	.transceiver_switch = mx6q_sabresd_flexcan0_switch,
+	emsym_blurr_flexcan0_pdata __initconst = {
+	.transceiver_switch = emsym_blurr_flexcan0_switch,
 };
 
 static struct viv_gpu_platform_data imx6q_gpu_pdata __initdata = {
@@ -1251,12 +1251,12 @@ static struct imx_asrc_platform_data imx_asrc_data = {
 
 static void mx6_reset_mipi_dsi(void)
 {
-	gpio_set_value(SABRESD_DISP_PWR_EN, 1);
-	gpio_set_value(SABRESD_DISP_RST_B, 1);
+	gpio_set_value(BLURR_DISP_PWR_EN, 1);
+	gpio_set_value(BLURR_DISP_RST_B, 1);
 	udelay(10);
-	gpio_set_value(SABRESD_DISP_RST_B, 0);
+	gpio_set_value(BLURR_DISP_RST_B, 0);
 	udelay(50);
-	gpio_set_value(SABRESD_DISP_RST_B, 1);
+	gpio_set_value(BLURR_DISP_RST_B, 1);
 
 	/*
 	 * it needs to delay 120ms minimum for reset complete
@@ -1337,8 +1337,8 @@ static void hdmi_enable_ddc_pin(void)
 		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_hdmi_ddc_pads,
 			ARRAY_SIZE(mx6dl_sabresd_hdmi_ddc_pads));
 	else
-		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_hdmi_ddc_pads,
-			ARRAY_SIZE(mx6q_sabresd_hdmi_ddc_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_hdmi_ddc_pads,
+			ARRAY_SIZE(emsym_blurr_hdmi_ddc_pads));
 }
 
 static void hdmi_disable_ddc_pin(void)
@@ -1347,8 +1347,8 @@ static void hdmi_disable_ddc_pin(void)
 		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_i2c2_pads,
 			ARRAY_SIZE(mx6dl_sabresd_i2c2_pads));
 	else
-		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_i2c2_pads,
-			ARRAY_SIZE(mx6q_sabresd_i2c2_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_i2c2_pads,
+			ARRAY_SIZE(emsym_blurr_i2c2_pads));
 }
 
 static struct fsl_mxc_hdmi_platform_data hdmi_data = {
@@ -1380,10 +1380,10 @@ static struct fsl_mxc_ldb_platform_data ldb_data = {
 };
 
 static struct max8903_pdata charger1_data = {
-	.dok = SABRESD_CHARGE_DOK_B,
-	.uok = SABRESD_CHARGE_UOK_B,
-	.chg = SABRESD_CHARGE_CHG_1_B,
-	.flt = SABRESD_CHARGE_FLT_1_B,
+	.dok = BLURR_CHARGE_DOK_B,
+	.uok = BLURR_CHARGE_UOK_B,
+	.chg = BLURR_CHARGE_CHG_1_B,
+	.flt = BLURR_CHARGE_FLT_1_B,
 	.dcm_always_high = true,
 	.dc_valid = true,
 	.usb_valid = true,
@@ -1437,16 +1437,16 @@ static void sabresd_suspend_enter(void)
 {
 	/* suspend preparation */
 	/* Disable AUX 5V */
-	gpio_set_value(SABRESD_AUX_5V_EN, 0);
+	gpio_set_value(BLURR_AUX_5V_EN, 0);
 }
 
 static void sabresd_suspend_exit(void)
 {
 	/* resume restore */
 	/* Enable AUX 5V */
-	gpio_set_value(SABRESD_AUX_5V_EN, 1);
+	gpio_set_value(BLURR_AUX_5V_EN, 1);
 }
-static const struct pm_platform_data mx6q_sabresd_pm_data __initconst = {
+static const struct pm_platform_data emsym_blurr_pm_data __initconst = {
 	.name = "imx_pm",
 	.suspend_enter = sabresd_suspend_enter,
 	.suspend_exit = sabresd_suspend_exit,
@@ -1481,16 +1481,16 @@ static struct platform_device sabresd_vmmc_reg_devices = {
 static int __init imx6q_init_audio(void)
 {
 	if (board_is_mx6_reva()) {
-		mxc_register_device(&mx6_sabresd_audio_wm8958_device,
+		mxc_register_device(&emsym_blurr_audio_wm8958_device,
 				    &wm8958_data);
-		imx6q_add_imx_ssi(1, &mx6_sabresd_ssi_pdata);
+		imx6q_add_imx_ssi(1, &emsym_blurr_ssi_pdata);
 
 		mxc_wm8958_init();
 	} else {
 		platform_device_register(&sabresd_vwm8962_reg_devices);
-		mxc_register_device(&mx6_sabresd_audio_wm8962_device,
+		mxc_register_device(&emsym_blurr_audio_wm8962_device,
 				    &wm8962_data);
-		imx6q_add_imx_ssi(1, &mx6_sabresd_ssi_pdata);
+		imx6q_add_imx_ssi(1, &emsym_blurr_ssi_pdata);
 
 		mxc_wm8962_init();
 	}
@@ -1502,39 +1502,39 @@ static int __init imx6q_init_audio(void)
 static void pcie_3v3_power(void)
 {
 	/* disable PCIE_3V3 first */
-	gpio_request(SABRESD_PCIE_PWR_EN, "pcie_3v3_en");
-	gpio_direction_output(SABRESD_PCIE_PWR_EN, 0);
+	gpio_request(BLURR_PCIE_PWR_EN, "pcie_3v3_en");
+	gpio_direction_output(BLURR_PCIE_PWR_EN, 0);
 	mdelay(10);
 	/* enable PCIE_3V3 again */
-	gpio_set_value(SABRESD_PCIE_PWR_EN, 1);
-	gpio_free(SABRESD_PCIE_PWR_EN);
+	gpio_set_value(BLURR_PCIE_PWR_EN, 1);
+	gpio_free(BLURR_PCIE_PWR_EN);
 }
 
 static void pcie_3v3_reset(void)
 {
 	/* reset miniPCIe */
-	gpio_request(SABRESD_PCIE_RST_B_REVB, "pcie_reset_rebB");
-	gpio_direction_output(SABRESD_PCIE_RST_B_REVB, 0);
+	gpio_request(BLURR_PCIE_RST_B_REVB, "pcie_reset_rebB");
+	gpio_direction_output(BLURR_PCIE_RST_B_REVB, 0);
 	/* The PCI Express Mini CEM specification states that PREST# is
 	deasserted minimum 1ms after 3.3vVaux has been applied and stable*/
 	mdelay(1);
-	gpio_set_value(SABRESD_PCIE_RST_B_REVB, 1);
-	gpio_free(SABRESD_PCIE_RST_B_REVB);
+	gpio_set_value(BLURR_PCIE_RST_B_REVB, 1);
+	gpio_free(BLURR_PCIE_RST_B_REVB);
 }
 #endif
 
 static void gps_power_on(bool on)
 {
 	/* Enable/disable aux_3v15 */
-	gpio_request(SABRESD_AUX_3V15_EN, "aux_3v15_en");
-	gpio_direction_output(SABRESD_AUX_3V15_EN, 1);
-	gpio_set_value(SABRESD_AUX_3V15_EN, on);
-	gpio_free(SABRESD_AUX_3V15_EN);
+	gpio_request(BLURR_AUX_3V15_EN, "aux_3v15_en");
+	gpio_direction_output(BLURR_AUX_3V15_EN, 1);
+	gpio_set_value(BLURR_AUX_3V15_EN, on);
+	gpio_free(BLURR_AUX_3V15_EN);
 	/*Enable/disable gps_en*/
-	gpio_request(SABRESD_GPS_EN, "gps_en");
-	gpio_direction_output(SABRESD_GPS_EN, 1);
-	gpio_set_value(SABRESD_GPS_EN, on);
-	gpio_free(SABRESD_GPS_EN);
+	gpio_request(BLURR_GPS_EN, "gps_en");
+	gpio_direction_output(BLURR_GPS_EN, 1);
+	gpio_set_value(BLURR_GPS_EN, on);
+	gpio_free(BLURR_GPS_EN);
 
 }
 
@@ -1551,16 +1551,16 @@ static void gps_power_on(bool on)
 }
 
 /* use to show a external power source is connected
- * GPIO_LED(SABRESD_CHARGE_DONE, "chg_detect", 0, 1, "ac-online"),
+ * GPIO_LED(BLURR_CHARGE_DONE, "chg_detect", 0, 1, "ac-online"),
  */
 static struct gpio_led imx6q_gpio_leds[] = {
-	GPIO_LED(SABRESD_CHARGE_NOW, "chg_now_led", 0, 1,
+	GPIO_LED(BLURR_CHARGE_NOW, "chg_now_led", 0, 1,
 		"charger-charging"),
 /* For the latest B4 board, this GPIO_1 is connected to POR_B,
 which will reset the whole board if this pin's level is changed,
 so, for the latest board, we have to avoid using this pin as
 GPIO.
-	GPIO_LED(SABRESD_CHARGE_DONE, "chg_done_led", 0, 1,
+	GPIO_LED(BLURR_CHARGE_DONE, "chg_done_led", 0, 1,
 			"charger-full"),
 */
 };
@@ -1600,9 +1600,9 @@ static void __init imx6q_add_device_gpio_leds(void) {}
 }
 
 static struct gpio_keys_button imx6q_buttons[] = {
-	GPIO_BUTTON(SABRESD_VOLUME_UP, KEY_VOLUMEUP, 1, "volume-up", 0, 1),
-	GPIO_BUTTON(SABRESD_VOLUME_DN, KEY_VOLUMEDOWN, 1, "volume-down", 0, 1),
-	GPIO_BUTTON(SABRESD_POWER_OFF, KEY_POWER, 1, "power", 1, 1),
+	GPIO_BUTTON(BLURR_VOLUME_UP, KEY_VOLUMEUP, 1, "volume-up", 0, 1),
+	GPIO_BUTTON(BLURR_VOLUME_DN, KEY_VOLUMEDOWN, 1, "volume-down", 0, 1),
+	GPIO_BUTTON(BLURR_POWER_OFF, KEY_POWER, 1, "power", 1, 1),
 };
 
 static struct gpio_keys_platform_data imx6q_button_data = {
@@ -1627,7 +1627,7 @@ static void __init imx6q_add_device_buttons(void)
 static void __init imx6q_add_device_buttons(void) {}
 #endif
 
-static struct platform_pwm_backlight_data mx6_sabresd_pwm_backlight_data = {
+static struct platform_pwm_backlight_data emsym_blurr_pwm_backlight_data = {
 	.pwm_id = 0,
 	.max_brightness = 248,
 	.dft_brightness = 128,
@@ -1690,11 +1690,11 @@ static void mx6_snvs_poweroff(void)
 	writel(value | 0x60, mx6_snvs_base + SNVS_LPCR);
 }
 
-static const struct imx_pcie_platform_data mx6_sabresd_pcie_data __initconst = {
-	.pcie_pwr_en	= SABRESD_PCIE_PWR_EN,
-	.pcie_rst	= SABRESD_PCIE_RST_B_REVB,
-	.pcie_wake_up	= SABRESD_PCIE_WAKE_B,
-	.pcie_dis	= SABRESD_PCIE_DIS_B,
+static const struct imx_pcie_platform_data emsym_blurr_pcie_data __initconst = {
+	.pcie_pwr_en	= BLURR_PCIE_PWR_EN,
+	.pcie_rst	= BLURR_PCIE_RST_B_REVB,
+	.pcie_wake_up	= BLURR_PCIE_WAKE_B,
+	.pcie_dis	= BLURR_PCIE_DIS_B,
 #ifdef CONFIG_IMX_PCIE_EP_MODE_IN_EP_RC_SYS
 	.type_ep	= 1,
 #else
@@ -1705,7 +1705,7 @@ static const struct imx_pcie_platform_data mx6_sabresd_pcie_data __initconst = {
 /*!
  * Board specific initialization.
  */
-static void __init mx6_sabresd_board_init(void)
+static void __init emsym_blurr_board_init(void)
 {
 	int i;
 	int ret;
@@ -1715,8 +1715,8 @@ static void __init mx6_sabresd_board_init(void)
 	struct platform_device *voutdev;
 
 	if (cpu_is_mx6q()) {
-		mxc_iomux_v3_setup_multiple_pads(mx6q_sabresd_pads,
-			ARRAY_SIZE(mx6q_sabresd_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_pads,
+			ARRAY_SIZE(emsym_blurr_pads));
 		if (enet_to_gpio_6) {
 			iomux_v3_cfg_t enet_gpio_pad =
 				MX6Q_PAD_GPIO_6__ENET_IRQ_TO_GPIO_6;
@@ -1753,7 +1753,7 @@ static void __init mx6_sabresd_board_init(void)
 
 	gp_reg_id = sabresd_dvfscore_data.reg_id;
 	soc_reg_id = sabresd_dvfscore_data.soc_id;
-	mx6q_sabresd_init_uart();
+	emsym_blurr_init_uart();
 
 	/*
 	 * MX6DL/Solo only supports single IPU
@@ -1808,32 +1808,32 @@ static void __init mx6_sabresd_board_init(void)
 	}
 	imx6q_add_device_gpio_leds();
 
-	imx6q_add_imx_i2c(0, &mx6q_sabresd_i2c_data);
-	imx6q_add_imx_i2c(1, &mx6q_sabresd_i2c_data);
-	imx6q_add_imx_i2c(2, &mx6q_sabresd_i2c_data);
+	imx6q_add_imx_i2c(0, &emsym_blurr_i2c_data);
+	imx6q_add_imx_i2c(1, &emsym_blurr_i2c_data);
+	imx6q_add_imx_i2c(2, &emsym_blurr_i2c_data);
 	if (cpu_is_mx6dl())
-		imx6q_add_imx_i2c(3, &mx6q_sabresd_i2c_data);
+		imx6q_add_imx_i2c(3, &emsym_blurr_i2c_data);
 	i2c_register_board_info(0, mxc_i2c0_board_info,
 			ARRAY_SIZE(mxc_i2c0_board_info));
 	i2c_register_board_info(1, mxc_i2c1_board_info,
 			ARRAY_SIZE(mxc_i2c1_board_info));
 	i2c_register_board_info(2, mxc_i2c2_board_info,
 			ARRAY_SIZE(mxc_i2c2_board_info));
-	ret = gpio_request(SABRESD_PFUZE_INT, "pFUZE-int");
+	ret = gpio_request(BLURR_PFUZE_INT, "pFUZE-int");
 	if (ret) {
 		printk(KERN_ERR"request pFUZE-int error!!\n");
 		return;
 	} else {
-		gpio_direction_input(SABRESD_PFUZE_INT);
-		mx6q_sabresd_init_pfuze100(SABRESD_PFUZE_INT);
+		gpio_direction_input(BLURR_PFUZE_INT);
+		mx6q_sabresd_init_pfuze100(BLURR_PFUZE_INT);
 	}
 	/* SPI */
-	imx6q_add_ecspi(0, &mx6q_sabresd_spi_data);
+	imx6q_add_ecspi(0, &emsym_blurr_spi_data);
 	spi_device_init();
 
 	imx6q_add_mxc_hdmi(&hdmi_data);
 
-	imx6q_add_anatop_thermal_imx(1, &mx6q_sabresd_anatop_thermal_data);
+	imx6q_add_anatop_thermal_imx(1, &emsym_blurr_anatop_thermal_data);
 
 	if (enet_to_gpio_6)
 		/* Make sure the IOMUX_OBSRV_MUX1 is set to ENET_IRQ. */
@@ -1845,22 +1845,22 @@ static void __init mx6_sabresd_board_init(void)
 		fec_data.gpio_irq = -1;
 	imx6_init_fec(fec_data);
 
-	imx6q_add_pm_imx(0, &mx6q_sabresd_pm_data);
+	imx6q_add_pm_imx(0, &emsym_blurr_pm_data);
 
 	/* Move sd4 to first because sd4 connect to emmc.
 	   Mfgtools want emmc is mmcblk0 and other sd card is mmcblk1.
 	*/
-	imx6q_add_sdhci_usdhc_imx(3, &mx6q_sabresd_sd4_data);
-	imx6q_add_sdhci_usdhc_imx(1, &mx6q_sabresd_sd2_data);
-	imx6q_add_sdhci_usdhc_imx(2, &mx6q_sabresd_sd3_data);
+	imx6q_add_sdhci_usdhc_imx(3, &emsym_blurr_sd4_data);
+	imx6q_add_sdhci_usdhc_imx(1, &emsym_blurr_sd2_data);
+	imx6q_add_sdhci_usdhc_imx(2, &emsym_blurr_sd3_data);
 	imx_add_viv_gpu(&imx6_gpu_data, &imx6q_gpu_pdata);
-	imx6q_sabresd_init_usb();
+	emsym_blurr_init_usb();
 	/* SATA is not supported by MX6DL/Solo */
 	if (cpu_is_mx6q()) {
 #ifdef CONFIG_SATA_AHCI_PLATFORM
-		imx6q_add_ahci(0, &mx6q_sabresd_sata_data);
+		imx6q_add_ahci(0, &emsym_blurr_sata_data);
 #else
-		mx6q_sabresd_sata_init(NULL,
+		emsym_blurr_sata_init(NULL,
 			(void __iomem *)ioremap(MX6Q_SATA_BASE_ADDR, SZ_4K));
 #endif
 	}
@@ -1877,16 +1877,16 @@ static void __init mx6_sabresd_board_init(void)
 	 * according to the content shown on the panel which
 	 * may cause annoying unstable backlight issue.
 	 */
-	gpio_request(SABRESD_CABC_EN0, "cabc-en0");
-	gpio_direction_output(SABRESD_CABC_EN0, 0);
-	gpio_request(SABRESD_CABC_EN1, "cabc-en1");
-	gpio_direction_output(SABRESD_CABC_EN1, 0);
+	gpio_request(BLURR_CABC_EN0, "cabc-en0");
+	gpio_direction_output(BLURR_CABC_EN0, 0);
+	gpio_request(BLURR_CABC_EN1, "cabc-en1");
+	gpio_direction_output(BLURR_CABC_EN1, 0);
 
 	imx6q_add_mxc_pwm(0);
 	imx6q_add_mxc_pwm(1);
 	imx6q_add_mxc_pwm(2);
 	imx6q_add_mxc_pwm(3);
-	imx6q_add_mxc_pwm_backlight(0, &mx6_sabresd_pwm_backlight_data);
+	imx6q_add_mxc_pwm_backlight(0, &emsym_blurr_pwm_backlight_data);
 
 	imx6q_add_otp();
 	imx6q_add_viim();
@@ -1897,15 +1897,15 @@ static void __init mx6_sabresd_board_init(void)
 	imx6q_add_device_buttons();
 
 	/* enable sensor 3v3 and 1v8 */
-	gpio_request(SABRESD_SENSOR_EN, "sensor-en");
-	gpio_direction_output(SABRESD_SENSOR_EN, 1);
+	gpio_request(BLURR_SENSOR_EN, "sensor-en");
+	gpio_direction_output(BLURR_SENSOR_EN, 1);
 
 	/* enable ecompass intr */
-	gpio_request(SABRESD_eCOMPASS_INT, "ecompass-int");
-	gpio_direction_input(SABRESD_eCOMPASS_INT);
+	gpio_request(BLURR_eCOMPASS_INT, "ecompass-int");
+	gpio_direction_input(BLURR_eCOMPASS_INT);
 	/* enable light sensor intr */
-	gpio_request(SABRESD_ALS_INT, "als-int");
-	gpio_direction_input(SABRESD_ALS_INT);
+	gpio_request(BLURR_ALS_INT, "als-int");
+	gpio_direction_input(BLURR_ALS_INT);
 
 	imx6q_add_hdmi_soc();
 	imx6q_add_hdmi_soc_dai();
@@ -1919,12 +1919,12 @@ static void __init mx6_sabresd_board_init(void)
 		}
 	}
 	/*
-	ret = gpio_request_array(mx6q_sabresd_flexcan_gpios,
-			ARRAY_SIZE(mx6q_sabresd_flexcan_gpios));
+	ret = gpio_request_array(emsym_blurr_flexcan_gpios,
+			ARRAY_SIZE(emsym_blurr_flexcan_gpios));
 	if (ret)
 		pr_err("failed to request flexcan1-gpios: %d\n", ret);
 	else
-		imx6q_add_flexcan0(&mx6q_sabresd_flexcan0_pdata);
+		imx6q_add_flexcan0(&emsym_blurr_flexcan0_pdata);
 	*/
 
 	clko2 = clk_get(NULL, "clko2_clk");
@@ -1946,9 +1946,9 @@ static void __init mx6_sabresd_board_init(void)
 		clk_set_parent(clko, clko2);
 
 	/* Enable Aux_5V */
-	gpio_request(SABRESD_AUX_5V_EN, "aux_5v_en");
-	gpio_direction_output(SABRESD_AUX_5V_EN, 1);
-	gpio_set_value(SABRESD_AUX_5V_EN, 1);
+	gpio_request(BLURR_AUX_5V_EN, "aux_5v_en");
+	gpio_direction_output(BLURR_AUX_5V_EN, 1);
+	gpio_set_value(BLURR_AUX_5V_EN, 1);
 
 #ifndef CONFIG_IMX_PCIE
 	/* enable pcie 3v3 power without pcie driver */
@@ -1964,25 +1964,25 @@ static void __init mx6_sabresd_board_init(void)
 	imx6q_add_busfreq();
 
 	/* Add PCIe RC interface support */
-	imx6q_add_pcie(&mx6_sabresd_pcie_data);
+	imx6q_add_pcie(&emsym_blurr_pcie_data);
 	if (cpu_is_mx6dl()) {
 		mxc_iomux_v3_setup_multiple_pads(mx6dl_arm2_elan_pads,
 						ARRAY_SIZE(mx6dl_arm2_elan_pads));
 
 		/* ELAN Touchscreen */
-		gpio_request(SABRESD_ELAN_INT, "elan-interrupt");
-		gpio_direction_input(SABRESD_ELAN_INT);
+		gpio_request(BLURR_ELAN_INT, "elan-interrupt");
+		gpio_direction_input(BLURR_ELAN_INT);
 
-		gpio_request(SABRESD_ELAN_CE, "elan-cs");
-		gpio_direction_output(SABRESD_ELAN_CE, 1);
-		gpio_direction_output(SABRESD_ELAN_CE, 0);
+		gpio_request(BLURR_ELAN_CE, "elan-cs");
+		gpio_direction_output(BLURR_ELAN_CE, 1);
+		gpio_direction_output(BLURR_ELAN_CE, 0);
 
-		gpio_request(SABRESD_ELAN_RST, "elan-rst");
-		gpio_direction_output(SABRESD_ELAN_RST, 1);
-		gpio_direction_output(SABRESD_ELAN_RST, 0);
+		gpio_request(BLURR_ELAN_RST, "elan-rst");
+		gpio_direction_output(BLURR_ELAN_RST, 1);
+		gpio_direction_output(BLURR_ELAN_RST, 0);
 		mdelay(1);
-		gpio_direction_output(SABRESD_ELAN_RST, 1);
-		gpio_direction_output(SABRESD_ELAN_CE, 1);
+		gpio_direction_output(BLURR_ELAN_RST, 1);
+		gpio_direction_output(BLURR_ELAN_CE, 1);
 	}
 
 	imx6_add_armpmu();
@@ -1992,7 +1992,7 @@ static void __init mx6_sabresd_board_init(void)
 }
 
 extern void __iomem *twd_base;
-static void __init mx6_sabresd_timer_init(void)
+static void __init emsym_blurr_timer_init(void)
 {
 	struct clk *uart_clk;
 #ifdef CONFIG_LOCAL_TIMERS
@@ -2005,11 +2005,11 @@ static void __init mx6_sabresd_timer_init(void)
 	early_console_setup(UART1_BASE_ADDR, uart_clk);
 }
 
-static struct sys_timer mx6_sabresd_timer = {
-	.init   = mx6_sabresd_timer_init,
+static struct sys_timer emsym_blurr_timer = {
+	.init   = emsym_blurr_timer_init,
 };
 
-static void __init mx6q_sabresd_reserve(void)
+static void __init emsym_blurr_reserve(void)
 {
 	phys_addr_t phys;
 #if defined(CONFIG_MXC_GPU_VIV) || defined(CONFIG_MXC_GPU_VIV_MODULE)
@@ -2031,15 +2031,15 @@ static void __init mx6q_sabresd_reserve(void)
 }
 
 /*
- * initialize __mach_desc_MX6Q_SABRESD data structure.
+ * initialize __mach_desc_MX6Q_BLURR data structure.
  */
-MACHINE_START(MX6Q_SABRESD, "Freescale i.MX 6Quad/DualLite/Solo Sabre-SD Board")
-	/* Maintainer: Freescale Semiconductor, Inc. */
+MACHINE_START(IMX6_EMSYM_BLURR, "EMSYM blurr, i.MX 6Quad/DualLite/Solo CPU module.")
+	/* Maintainer: emsym.com */
 	.boot_params = MX6_PHYS_OFFSET + 0x100,
 	.fixup = fixup_mxc_board,
 	.map_io = mx6_map_io,
 	.init_irq = mx6_init_irq,
-	.init_machine = mx6_sabresd_board_init,
-	.timer = &mx6_sabresd_timer,
-	.reserve = mx6q_sabresd_reserve,
+	.init_machine = emsym_blurr_board_init,
+	.timer = &emsym_blurr_timer,
+	.reserve = emsym_blurr_reserve,
 MACHINE_END
