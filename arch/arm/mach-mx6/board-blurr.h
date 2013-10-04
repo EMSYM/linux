@@ -16,11 +16,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef _BOARD_MX6Q_SABRESD_H
-#define _BOARD_MX6Q_SABRESD_H
+#ifndef _BOARD_EMSYM_BLURR_H
+#define _BOARD_EMSYM_BLURR_H
 #include <mach/iomux-mx6q.h>
 
-static iomux_v3_cfg_t mx6q_sabresd_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_pads[] = {
 	/* AUDMUX */
 	MX6Q_PAD_CSI0_DAT4__AUDMUX_AUD3_TXC,
 	MX6Q_PAD_CSI0_DAT5__AUDMUX_AUD3_TXD,
@@ -264,7 +264,7 @@ static iomux_v3_cfg_t mx6q_sabresd_pads[] = {
 	MX6Q_PAD_NANDF_CS3__GPIO_6_16,
 };
 
-static iomux_v3_cfg_t mx6q_sabresd_csi0_sensor_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_csi0_sensor_pads[] = {
 	/* IPU1 Camera */
 	MX6Q_PAD_CSI0_DAT12__IPU1_CSI0_D_12,
 	MX6Q_PAD_CSI0_DAT13__IPU1_CSI0_D_13,
@@ -285,19 +285,19 @@ static iomux_v3_cfg_t mx6q_sabresd_csi0_sensor_pads[] = {
 	MX6Q_PAD_SD1_DAT1__GPIO_1_17,		/* camera RESET */
 };
 
-static iomux_v3_cfg_t mx6q_sabresd_mipi_sensor_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mipi_sensor_pads[] = {
 	MX6Q_PAD_GPIO_0__CCM_CLKO,		/* camera clk */
 
 	MX6Q_PAD_SD1_DAT2__GPIO_1_19,		/* camera PWDN */
 	MX6Q_PAD_SD1_CLK__GPIO_1_20,		/* camera RESET */
 };
 
-static iomux_v3_cfg_t mx6q_sabresd_hdmi_ddc_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_hdmi_ddc_pads[] = {
 	MX6Q_PAD_KEY_COL3__HDMI_TX_DDC_SCL, /* HDMI DDC SCL */
 	MX6Q_PAD_KEY_ROW3__HDMI_TX_DDC_SDA, /* HDMI DDC SDA */
 };
 
-static iomux_v3_cfg_t mx6q_sabresd_i2c2_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_i2c2_pads[] = {
 	MX6Q_PAD_KEY_COL3__I2C2_SCL,	/* I2C2 SCL */
 	MX6Q_PAD_KEY_ROW3__I2C2_SDA,	/* I2C2 SDA */
 };
