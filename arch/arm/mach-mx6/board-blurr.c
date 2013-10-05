@@ -249,8 +249,7 @@ static const struct anatop_thermal_platform_data
 
 static inline void emsym_blurr_init_uart(void)
 {
-	imx6q_add_imx_uart(2, NULL);
-	imx6q_add_imx_uart(0, NULL);
+	imx6q_add_imx_uart(3, NULL); //UART4
 }
 
 static int emsym_blurr_fec_phy_init(struct phy_device *phydev)
@@ -2000,7 +1999,7 @@ static void __init emsym_blurr_timer_init(void)
 	mx6_clocks_init(32768, 24000000, 0, 0);
 
 	uart_clk = clk_get_sys("imx-uart.0", NULL);
-	early_console_setup(UART1_BASE_ADDR, uart_clk);
+	early_console_setup(UART4_BASE_ADDR, uart_clk);
 }
 
 static struct sys_timer emsym_blurr_timer = {

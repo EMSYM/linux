@@ -37,12 +37,13 @@ static iomux_v3_cfg_t emsym_blurr_pads[] = {
 	/* CCM  */
 	MX6Q_PAD_GPIO_0__CCM_CLKO,		/* SGTL500 sys_mclk */
 	MX6Q_PAD_GPIO_3__CCM_CLKO2,		/* J5 - Camera MCLK */
-
+#if 0
 	/* ECSPI1 */
 	MX6Q_PAD_KEY_COL0__ECSPI1_SCLK,
 	MX6Q_PAD_KEY_ROW0__ECSPI1_MOSI,
 	MX6Q_PAD_KEY_COL1__ECSPI1_MISO,
 	MX6Q_PAD_KEY_ROW1__GPIO_4_9,
+#endif
 	/* ENET */
 	MX6Q_PAD_ENET_MDIO__ENET_MDIO,
 	MX6Q_PAD_ENET_MDC__ENET_MDC,
@@ -172,13 +173,17 @@ static iomux_v3_cfg_t emsym_blurr_pads[] = {
 	/* DISP_PWM */
 	MX6Q_PAD_SD1_DAT3__PWM1_PWMO,		/* GPIO1[21] */
 
-	/* UART1 for debug */
+	// UART1 
 	MX6Q_PAD_CSI0_DAT10__UART1_TXD,
 	MX6Q_PAD_CSI0_DAT11__UART1_RXD,
 
 	/* UART3 for gps */
 	MX6Q_PAD_EIM_D24__UART3_TXD,
 	MX6Q_PAD_EIM_D25__UART3_RXD,
+
+	/* UART4 for debug */
+	MX6Q_PAD_KEY_COL0__UART4_TXD,
+	MX6Q_PAD_KEY_ROW0__UART4_RXD,
 
 	/* USBOTG ID pin */
 	MX6Q_PAD_ENET_RX_ER__ANATOP_USBOTG_ID,
