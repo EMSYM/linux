@@ -763,9 +763,11 @@ static int pll_factors(unsigned int source, unsigned int target,
 	K /= 10;
 
 	pll_div->k = K;
-
+        
 	pr_debug("WM8960 PLL: N=%x K=%x pre_div=%d\n",
 		 pll_div->n, pll_div->k, pll_div->pre_div);
+       // printk("WM8960 PLL: N=%x K=%x pre_div=%d\n",
+        //	 pll_div->n, pll_div->k, pll_div->pre_div);
 
 	return 0;
 }
@@ -777,13 +779,12 @@ static int wm8960_set_dai_pll(struct snd_soc_dai *codec_dai, int pll_id,
 	u16 reg;
 	static struct _pll_div pll_div;
 	int ret;
-
+        printk("wm8960 pll set freq_in=%d,freq_out=%d\n",freq_in,freq_out);
 	if (freq_in && freq_out) {
 		ret = pll_factors(freq_in, freq_out, &pll_div);
 		if (ret != 0)
 			return ret;
 	}
-
 	/* Disable the PLL: even if we are changing the frequency the
 	 * PLL needs to be disabled while we do so. */
 	snd_soc_write(codec, WM8960_CLOCK1,
@@ -801,8 +802,8 @@ static int wm8960_set_dai_pll(struct snd_soc_dai *codec_dai, int pll_id,
 	if (pll_div.k) {
 		reg |= 0x20;
 
-		snd_soc_write(codec, WM8960_PLL2, (pll_div.k >> 18) & 0x3f);
-		snd_soc_write(codec, WM8960_PLL3, (pll_div.k >> 9) & 0x1ff);
+		snd_soc_write(codec, WM8960_PLL2, (pll_div.k >> 16) & 0x1ff);//18 0x3f
+		snd_soc_write(codec, WM8960_PLL3, (pll_div.k >> 8) & 0x1ff);//9
 		snd_soc_write(codec, WM8960_PLL4, pll_div.k & 0x1ff);
 	}
 	snd_soc_write(codec, WM8960_PLL1, reg);
@@ -813,6 +814,7 @@ static int wm8960_set_dai_pll(struct snd_soc_dai *codec_dai, int pll_id,
 	msleep(250);
 	snd_soc_write(codec, WM8960_CLOCK1,
 		     snd_soc_read(codec, WM8960_CLOCK1) | 1);
+        //printk("clok1=0x%x,power2=0x%x,pll1=0x%x\n",snd_soc_read(codec, WM8960_CLOCK1),snd_soc_read(codec, WM8960_POWER2),snd_soc_read(codec, WM8960_PLL1));
 
 	return 0;
 }
@@ -843,6 +845,14 @@ static int wm8960_set_dai_clkdiv(struct snd_soc_dai *codec_dai,
 	case WM8960_TOCLKSEL:
 		reg = snd_soc_read(codec, WM8960_ADDCTL1) & 0x1fd;
 		snd_soc_write(codec, WM8960_ADDCTL1, reg | div);
+		break;
+        case WM8960_BCLKDIV:
+               // printk("dclk in\n");
+		reg = snd_soc_read(codec, WM8960_CLOCK2) & 0x1f0;
+               // printk("WM8960_CLOCK2 dclk=%d\n",reg);
+               // printk("WM8960_CLOCK2 div=%d\n",div);
+		snd_soc_write(codec, WM8960_CLOCK2, reg | div);
+               // printk("dclk sucessfull\n");
 		break;
 	default:
 		return -EINVAL;
@@ -926,7 +936,7 @@ static int wm8960_probe(struct snd_soc_codec *codec)
 
 	wm8960->set_bias_level = wm8960_set_bias_level_out3;
 	codec->control_data = wm8960->control_data;
-
+         printk("wm8960 codec probe start\n");
 	if (!pdata) {
 		dev_warn(codec->dev, "No platform data supplied\n");
 	} else {
@@ -978,7 +988,7 @@ static int wm8960_probe(struct snd_soc_codec *codec)
 	snd_soc_add_controls(codec, wm8960_snd_controls,
 				     ARRAY_SIZE(wm8960_snd_controls));
 	wm8960_add_widgets(codec);
-
+        printk("wm8960 codec probe\n");
 	return 0;
 }
 
@@ -1008,7 +1018,7 @@ static __devinit int wm8960_i2c_probe(struct i2c_client *i2c,
 {
 	struct wm8960_priv *wm8960;
 	int ret;
-
+        printk("wm8960 i2C probe\n");
 	wm8960 = kzalloc(sizeof(struct wm8960_priv), GFP_KERNEL);
 	if (wm8960 == NULL)
 		return -ENOMEM;
@@ -1019,8 +1029,11 @@ static __devinit int wm8960_i2c_probe(struct i2c_client *i2c,
 
 	ret = snd_soc_register_codec(&i2c->dev,
 			&soc_codec_dev_wm8960, &wm8960_dai, 1);
-	if (ret < 0)
+        printk("wm8960 i2C probe sucessful\n");
+	if (ret < 0){
 		kfree(wm8960);
+                printk("snd_soc_register_codec error\n");
+          }
 	return ret;
 }
 
