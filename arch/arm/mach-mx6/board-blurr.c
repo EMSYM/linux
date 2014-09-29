@@ -506,8 +506,8 @@ static void mx6q_csi0_io_init(void)
 		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_csi0_sensor_pads,
 			ARRAY_SIZE(emsym_blurr_csi0_sensor_pads));
 	else if (cpu_is_mx6dl())
-		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_csi0_sensor_pads,
-			ARRAY_SIZE(mx6dl_sabresd_csi0_sensor_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_csi0_sensor_pads,
+			ARRAY_SIZE(emsym_blurr_mx6dl_csi0_sensor_pads));
 
 	/* Camera reset */
 	gpio_request(BLURR_CSI0_RST, "cam-reset");
@@ -573,8 +573,8 @@ static void mx6q_mipi_sensor_io_init(void)
 		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mipi_sensor_pads,
 			ARRAY_SIZE(emsym_blurr_mipi_sensor_pads));
 	else if (cpu_is_mx6dl())
-		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_mipi_sensor_pads,
-			ARRAY_SIZE(mx6dl_sabresd_mipi_sensor_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_mipi_sensor_pads,
+			ARRAY_SIZE(emsym_blurr_mx6dl_mipi_sensor_pads));
 
 	/* Camera reset */
 	gpio_request(BLURR_MIPICSI_RST, "cam-reset");
@@ -906,8 +906,8 @@ static void epdc_put_pins(void)
 static void epdc_enable_pins(void)
 {
 	/* Configure MUX settings to enable EPDC use */
-	mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_epdc_enable_pads, \
-				ARRAY_SIZE(mx6dl_sabresd_epdc_enable_pads));
+	mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_epdc_enable_pads, \
+				ARRAY_SIZE(emsym_blurr_mx6dl_epdc_enable_pads));
 
 	gpio_direction_input(BLURR_EPDC_SDDO_0);
 	gpio_direction_input(BLURR_EPDC_SDDO_1);
@@ -935,8 +935,8 @@ static void epdc_disable_pins(void)
 {
 	/* Configure MUX settings for EPDC pins to
 	 * GPIO and drive to 0. */
-	mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_epdc_disable_pads, \
-				ARRAY_SIZE(mx6dl_sabresd_epdc_disable_pads));
+	mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_epdc_disable_pads, \
+				ARRAY_SIZE(emsym_blurr_mx6dl_epdc_disable_pads));
 
 	gpio_direction_output(BLURR_EPDC_SDDO_0, 0);
 	gpio_direction_output(BLURR_EPDC_SDDO_1, 0);
@@ -1334,8 +1334,8 @@ static void hdmi_init(int ipu_id, int disp_id)
 static void hdmi_enable_ddc_pin(void)
 {
 	if (cpu_is_mx6dl())
-		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_hdmi_ddc_pads,
-			ARRAY_SIZE(mx6dl_sabresd_hdmi_ddc_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_hdmi_ddc_pads,
+			ARRAY_SIZE(emsym_blurr_mx6dl_hdmi_ddc_pads));
 	else
 		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_hdmi_ddc_pads,
 			ARRAY_SIZE(emsym_blurr_hdmi_ddc_pads));
@@ -1344,8 +1344,8 @@ static void hdmi_enable_ddc_pin(void)
 static void hdmi_disable_ddc_pin(void)
 {
 	if (cpu_is_mx6dl())
-		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_i2c2_pads,
-			ARRAY_SIZE(mx6dl_sabresd_i2c2_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_i2c2_pads,
+			ARRAY_SIZE(emsym_blurr_mx6dl_i2c2_pads));
 	else
 		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_i2c2_pads,
 			ARRAY_SIZE(emsym_blurr_i2c2_pads));
@@ -1727,8 +1727,8 @@ static void __init emsym_blurr_board_init(void)
 			mxc_iomux_v3_setup_pad(i2c3_pad);
 		}
 	} else if (cpu_is_mx6dl()) {
-		mxc_iomux_v3_setup_multiple_pads(mx6dl_sabresd_pads,
-			ARRAY_SIZE(mx6dl_sabresd_pads));
+		mxc_iomux_v3_setup_multiple_pads(emsym_blurr_mx6dl_pads,
+			ARRAY_SIZE(emsym_blurr_mx6dl_pads));
 
 		if (enet_to_gpio_6) {
 			iomux_v3_cfg_t enet_gpio_pad =
