@@ -20,7 +20,7 @@
 #define _BOARD_MX6DL_SABRESD_H
 #include <mach/iomux-mx6dl.h>
 
-static iomux_v3_cfg_t mx6dl_sabresd_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_pads[] = {
 	/* AUDMUX */
 	MX6DL_PAD_CSI0_DAT4__AUDMUX_AUD3_TXC,
 	MX6DL_PAD_CSI0_DAT5__AUDMUX_AUD3_TXD,
@@ -268,7 +268,7 @@ static iomux_v3_cfg_t mx6dl_sabresd_pads[] = {
 	MX6DL_PAD_GPIO_2__GPIO_1_2,
 };
 
-static iomux_v3_cfg_t mx6dl_sabresd_csi0_sensor_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_csi0_sensor_pads[] = {
 	/* IPU1 Camera */
 	MX6DL_PAD_CSI0_DAT12__IPU1_CSI0_D_12,
 	MX6DL_PAD_CSI0_DAT13__IPU1_CSI0_D_13,
@@ -289,14 +289,14 @@ static iomux_v3_cfg_t mx6dl_sabresd_csi0_sensor_pads[] = {
 	MX6DL_PAD_SD1_DAT1__GPIO_1_17,		/* camera RESET */
 };
 
-static iomux_v3_cfg_t mx6dl_sabresd_mipi_sensor_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_mipi_sensor_pads[] = {
 	MX6DL_PAD_GPIO_0__CCM_CLKO,		/* camera clk */
 
 	MX6DL_PAD_SD1_DAT2__GPIO_1_19,		/* camera PWDN */
 	MX6DL_PAD_SD1_CLK__GPIO_1_20,		/* camera RESET */
 };
 
-static iomux_v3_cfg_t mx6dl_sabresd_epdc_enable_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_epdc_enable_pads[] = {
 	/* EPDC */
 	MX6DL_PAD_EIM_A16__EPDC_SDDO_0,
 	MX6DL_PAD_EIM_DA10__EPDC_SDDO_1,
@@ -342,7 +342,7 @@ static iomux_v3_cfg_t mx6dl_sabresd_epdc_enable_pads[] = {
 	 */
 };
 
-static iomux_v3_cfg_t mx6dl_sabresd_epdc_disable_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_epdc_disable_pads[] = {
 	/* EPDC */
 	MX6DL_PAD_EIM_A16__GPIO_2_22,
 	MX6DL_PAD_EIM_DA10__GPIO_3_10,
@@ -389,12 +389,12 @@ static iomux_v3_cfg_t mx6dl_arm2_elan_pads[] = {
 	MX6DL_PAD_EIM_D28__GPIO_3_28,
 };
 
-static iomux_v3_cfg_t mx6dl_sabresd_hdmi_ddc_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_hdmi_ddc_pads[] = {
 	MX6DL_PAD_KEY_COL3__HDMI_TX_DDC_SCL, /* HDMI DDC SCL */
 	MX6DL_PAD_KEY_ROW3__HDMI_TX_DDC_SDA, /* HDMI DDC SDA */
 };
 
-static iomux_v3_cfg_t mx6dl_sabresd_i2c2_pads[] = {
+static iomux_v3_cfg_t emsym_blurr_mx6dl_i2c2_pads[] = {
 	MX6DL_PAD_KEY_COL3__I2C2_SCL,	/* I2C2 SCL */
 	MX6DL_PAD_KEY_ROW3__I2C2_SDA,	/* I2C2 SDA */
 };
