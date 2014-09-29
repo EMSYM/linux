@@ -81,7 +81,7 @@
 #include "crm_regs.h"
 #include "cpu_op-mx6.h"
 #include "board-blurr.h"
-#include "board-mx6dl_sabresd.h"
+#include "board-mx6dl-blurr.h"
 
 #define BLURR_USR_DEF_GRN_LED	IMX_GPIO_NR(1, 1)
 #define BLURR_USR_DEF_RED_LED	IMX_GPIO_NR(1, 2)
