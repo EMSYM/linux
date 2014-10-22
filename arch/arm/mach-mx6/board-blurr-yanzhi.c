@@ -82,6 +82,7 @@
 #include "cpu_op-mx6.h"
 #include "board-blurr.h"
 #include "board-mx6dl-blurr-yanzhi.h"
+#include <mach/iomux-mx6dl.h>
 
 #define BLURR_USR_DEF_GRN_LED	IMX_GPIO_NR(1, 1)
 #define BLURR_USR_DEF_RED_LED	IMX_GPIO_NR(1, 2)
@@ -1698,6 +1699,43 @@ static const struct imx_pcie_platform_data emsym_blurr_pcie_data __initconst = {
 	.type_ep	= 0,
 #endif
 };
+static iomux_v3_cfg_t mx6dl_gpmi_nand[] __initdata = {
+	MX6DL_PAD_NANDF_CLE__RAWNAND_CLE,
+	MX6DL_PAD_NANDF_ALE__RAWNAND_ALE,
+	MX6DL_PAD_NANDF_CS0__RAWNAND_CE0N,
+	MX6DL_PAD_NANDF_CS1__RAWNAND_CE1N,
+	MX6DL_PAD_NANDF_RB0__RAWNAND_READY0,
+	MX6DL_PAD_SD4_DAT0__RAWNAND_DQS,
+	MX6DL_PAD_NANDF_D0__RAWNAND_D0,
+	MX6DL_PAD_NANDF_D1__RAWNAND_D1,
+	MX6DL_PAD_NANDF_D2__RAWNAND_D2,
+	MX6DL_PAD_NANDF_D3__RAWNAND_D3,
+	MX6DL_PAD_NANDF_D4__RAWNAND_D4,
+	MX6DL_PAD_NANDF_D5__RAWNAND_D5,
+	MX6DL_PAD_NANDF_D6__RAWNAND_D6,
+	MX6DL_PAD_NANDF_D7__RAWNAND_D7,
+	MX6DL_PAD_SD4_CMD__RAWNAND_RDN,
+	MX6DL_PAD_SD4_CLK__RAWNAND_WRN,
+	MX6DL_PAD_NANDF_WP_B__RAWNAND_RESETN,
+};
+static int __init gpmi_nand_platform_init(void)
+{
+	iomux_v3_cfg_t *nand_pads = NULL;
+	u32 nand_pads_cnt;
+
+		nand_pads = mx6dl_gpmi_nand;
+		nand_pads_cnt = ARRAY_SIZE(mx6dl_gpmi_nand);
+	BUG_ON(!nand_pads);
+	return mxc_iomux_v3_setup_multiple_pads(nand_pads, nand_pads_cnt);
+}
+
+static const struct gpmi_nand_platform_data
+mx6dl_gpmi_nand_platform_data __initconst = {
+	.platform_init           = gpmi_nand_platform_init,
+	.min_prop_delay_in_ns    = 5,
+	.max_prop_delay_in_ns    = 9,
+	.max_chip_count          = 1,
+};
 
 /*!
  * Board specific initialization.
@@ -1889,7 +1927,8 @@ static void __init emsym_blurr_board_init(void)
 	imx6q_add_viim();
 	imx6q_add_imx2_wdt(0, NULL);
 	imx6q_add_dma();
-
+	// change for nand
+	imx6q_add_gpmi(&mx6dl_gpmi_nand_platform_data);
 	imx6q_add_dvfs_core(&sabresd_dvfscore_data);
 	imx6q_add_device_buttons();
 
@@ -1909,6 +1948,7 @@ static void __init emsym_blurr_board_init(void)
 
 	if (cpu_is_mx6dl()) {
 		imx6dl_add_imx_pxp();
+
 		imx6dl_add_imx_pxp_client();
 /*		if (epdc_enabled) {
 			mxc_register_device(&max17135_sensor_device, NULL);

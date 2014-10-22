@@ -20,6 +20,7 @@
 #define _BOARD_MX6DL_SABRESD_H
 #include <mach/iomux-mx6dl.h>
 
+#define imx6dl_add_gpmi(platform_data)	imx_add_gpmi(platform_data);
 static iomux_v3_cfg_t emsym_blurr_mx6dl_pads[] = {
 	/* AUDMUX */
 	MX6DL_PAD_CSI0_DAT4__AUDMUX_AUD3_TXC,
