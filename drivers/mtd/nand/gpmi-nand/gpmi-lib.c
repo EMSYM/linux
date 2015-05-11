@@ -395,7 +395,7 @@ static int enable_edo_mode(struct gpmi_nand_data *this, int mode)
 	struct mtd_info	 *mtd = &this->mtd;
 	uint8_t device_feature[FEATURE_SIZE];
 	int status;
-
+        #if 0
 	nand->select_chip(mtd, 0);
 
 	/* [1] send SET FEATURE commond to NAND */
@@ -421,7 +421,7 @@ static int enable_edo_mode(struct gpmi_nand_data *this, int mode)
 	}
 
 	nand->select_chip(mtd, -1);
-
+        #endif
 	/* [2] about the clock, pay attention! */
 	{
 		unsigned long rate;
