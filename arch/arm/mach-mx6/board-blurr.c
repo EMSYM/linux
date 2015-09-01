@@ -216,7 +216,11 @@ static const struct anatop_thermal_platform_data
 
 static inline void emsym_blurr_init_uart(void)
 {
-	imx6q_add_imx_uart(0, NULL); //UART0
+	imx6q_add_imx_uart(2, NULL);
+	imx6q_add_imx_uart(0, NULL);
+        imx6q_add_imx_uart(1, NULL);
+        imx6q_add_imx_uart(3, NULL);
+        imx6q_add_imx_uart(4, NULL);
 }
 
 static int emsym_blurr_fec_phy_init(struct phy_device *phydev)
@@ -439,22 +443,19 @@ static struct fsl_mxc_lightsensor_platform_data ls_data = {
 };
 
 static struct i2c_board_info mxc_i2c0_board_info[] __initdata = {
-	{
-		I2C_BOARD_INFO("wm89**", 0x1a),
-	},
-	{
-		I2C_BOARD_INFO("ov564x", 0x3c),
-		.platform_data = (void *)&camera_data,
-	},
+        {
+                 I2C_BOARD_INFO("sgtl5000", 0x0a),
+	 },
+         {
+                 I2C_BOARD_INFO("rtc-ds1307", 0x68),
+                 .type="ds1307",
+	 },
+
 };
 
 static struct i2c_board_info mxc_i2c1_board_info[] __initdata = {
 	{
 		I2C_BOARD_INFO("mxc_hdmi_i2c", 0x50),
-	},
-	{
-		I2C_BOARD_INFO("ov5640_mipi", 0x3c),
-		.platform_data = (void *)&mipi_csi2_data,
 	},
 	{
 		I2C_BOARD_INFO("egalax_ts", 0x4),
@@ -463,14 +464,16 @@ static struct i2c_board_info mxc_i2c1_board_info[] __initdata = {
 };
 
 static struct i2c_board_info mxc_i2c2_board_info[] __initdata = {
-
 	{
 		I2C_BOARD_INFO("egalax_ts", 0x4),
 		.irq = gpio_to_irq(BLURR_CAP_TCH_INT1),
 	},
-
+ 
+	{
+		I2C_BOARD_INFO("mxc_ldb_i2c", 0x50),
+		.platform_data = (void *)1,	/* lvds port1 */
+	},
 };
-
 
 static void emsym_blurr_usbotg_vbus(bool on)
 {
@@ -840,18 +843,135 @@ static struct platform_device BLURR_vmmc_reg_devices = {
 		.platform_data = &BLURR_vmmc_reg_config,
 	},
 };
+/*****************audio*************************/
+static struct imx_ssi_platform_data mx6_sabresd_ssi_pdata = {
+	.flags = IMX_SSI_DMA | IMX_SSI_SYN,
+};
+
+
+
+static struct platform_device sgtl5000_devices = {
+	.name = "imx-sgtl5000",
+};
+
+static struct mxc_audio_platform_data sgtl5000_data;
+static int mxc_sgtl5000_init(void)
+{
+	int rate;
+
+	clko = clk_get(NULL, "clko_clk");
+	if (IS_ERR(clko)) {
+		pr_err("can't get CLKO clock.\n");
+		return PTR_ERR(clko);
+	}
+	/* both audio codec and comera use CLKO clk*/
+	rate = clk_round_rate(clko, 24000000);
+	clk_set_rate(clko, rate);
+        
+	sgtl5000_data.sysclk = rate;
+        clk_enable(clko);
+	return 0;
+}
+static struct mxc_audio_platform_data sgtl5000_data = {
+	.ssi_num = 1,
+	.src_port = 2,
+	.ext_port = 3,
+	.init = mxc_sgtl5000_init,
+	//.amp_enable = smd_sgtl5000_amp_enable,
+	.hp_gpio =BLURR_HEADPHONE_DET,
+	.hp_active_low = 0,
+};
+#ifdef CONFIG_SND_SOC_SGTL5000
+
+static struct regulator_consumer_supply sgtl5000_sabrelite_consumer_vdda = {
+	.supply = "VDDA",
+	.dev_name = "0-000a",
+};
+
+static struct regulator_consumer_supply sgtl5000_sabrelite_consumer_vddio = {
+	.supply = "VDDIO",
+	.dev_name = "0-000a",
+};
+
+static struct regulator_consumer_supply sgtl5000_sabrelite_consumer_vddd = {
+	.supply = "VDDD",
+	.dev_name = "0-000a",
+};
+
+static struct regulator_init_data sgtl5000_sabrelite_vdda_reg_initdata = {
+	.num_consumer_supplies = 1,
+	.consumer_supplies = &sgtl5000_sabrelite_consumer_vdda,
+};
+
+static struct regulator_init_data sgtl5000_sabrelite_vddio_reg_initdata = {
+	.num_consumer_supplies = 1,
+	.consumer_supplies = &sgtl5000_sabrelite_consumer_vddio,
+};
+
+static struct regulator_init_data sgtl5000_sabrelite_vddd_reg_initdata = {
+	.num_consumer_supplies = 1,
+	.consumer_supplies = &sgtl5000_sabrelite_consumer_vddd,
+};
+
+static struct fixed_voltage_config sgtl5000_sabrelite_vdda_reg_config = {
+	.supply_name		= "VDDA",
+	.microvolts		=3300000,
+	.gpio			= -1,
+	.init_data		= &sgtl5000_sabrelite_vdda_reg_initdata,
+};
+
+static struct fixed_voltage_config sgtl5000_sabrelite_vddio_reg_config = {
+	.supply_name		= "VDDIO",
+	.microvolts		= 3300000,
+	.gpio			= -1,
+	.init_data		= &sgtl5000_sabrelite_vddio_reg_initdata,
+};
+
+static struct fixed_voltage_config sgtl5000_sabrelite_vddd_reg_config = {
+	.supply_name		= "VDDD",
+	.microvolts		= 1800000,
+	.gpio			= -1,
+	.init_data		= &sgtl5000_sabrelite_vddd_reg_initdata,
+};
+
+static struct platform_device sgtl5000_sabrelite_vdda_reg_devices = {
+	.name	= "reg-fixed-voltage",
+	.id	= 0,
+	.dev	= {
+		.platform_data = &sgtl5000_sabrelite_vdda_reg_config,
+	},
+};
+
+static struct platform_device sgtl5000_sabrelite_vddio_reg_devices = {
+	.name	= "reg-fixed-voltage",
+	.id	= 1,
+	.dev	= {
+		.platform_data = &sgtl5000_sabrelite_vddio_reg_config,
+	},
+};
+
+static struct platform_device sgtl5000_sabrelite_vddd_reg_devices = {
+	.name	= "reg-fixed-voltage",
+	.id	= 2,
+	.dev	= {
+		.platform_data = &sgtl5000_sabrelite_vddd_reg_config,
+	},
+};
+#endif /* CONFIG_SND_SOC_SGTL5000 */
 
 static int __init imx6q_init_audio(void)
 {
-	/*if (board_is_mx6_reva()) {
-		mxc_register_device(&emsym_blurr_audio_wm8958_device,
-				    &wm8958_data);
-		imx6q_add_imx_ssi(1, &emsym_blurr_ssi_pdata);
 
-		mxc_wm8958_init();
-	}*/
+	mxc_register_device(&sgtl5000_devices,&sgtl5000_data);
+	imx6q_add_imx_ssi(1, &mx6_sabresd_ssi_pdata);
+#ifdef CONFIG_SND_SOC_SGTL5000
+	platform_device_register(&sgtl5000_sabrelite_vdda_reg_devices);
+	platform_device_register(&sgtl5000_sabrelite_vddio_reg_devices);
+	platform_device_register(&sgtl5000_sabrelite_vddd_reg_devices);
+#endif
 	return 0;
 }
+//**********************************************************************
 
 #ifndef CONFIG_IMX_PCIE
 static void pcie_3v3_power(void)
@@ -927,7 +1047,12 @@ static struct platform_pwm_backlight_data emsym_blurr_pwm_backlight_data = {
 	.dft_brightness = 128,
 	.pwm_period_ns = 50000,
 };
-
+static struct platform_pwm_backlight_data emsym_blurr_pwm_backlight_data1 = {
+	.pwm_id = 1,
+	.max_brightness = 248,
+	.dft_brightness = 128,
+	.pwm_period_ns = 50000,
+};
 static struct mxc_dvfs_platform_data BLURR_dvfscore_data = {
 	.reg_id = "VDDCORE",
 	.soc_id	= "VDDSOC",
@@ -1171,8 +1296,8 @@ static void __init emsym_blurr_board_init(void)
 	imx6q_add_mxc_pwm(1);
 	imx6q_add_mxc_pwm(2);
 	imx6q_add_mxc_pwm(3);
-	imx6q_add_mxc_pwm_backlight(0, &emsym_blurr_pwm_backlight_data);
-
+        imx6q_add_mxc_pwm_backlight(0, &emsym_blurr_pwm_backlight_data);
+        imx6q_add_mxc_pwm_backlight(1, &emsym_blurr_pwm_backlight_data1);
 	imx6q_add_otp();
 	imx6q_add_viim();
 	imx6q_add_imx2_wdt(0, NULL);
@@ -1196,7 +1321,7 @@ static void __init emsym_blurr_board_init(void)
 	else
 		imx6q_add_flexcan0(&emsym_blurr_flexcan0_pdata);
 	*/
-
+        imx6q_add_flexcan0(NULL);
 	clko2 = clk_get(NULL, "clko2_clk");
 	if (IS_ERR(clko2))
 		pr_err("can't get CLKO2 clock.\n");
@@ -1215,12 +1340,6 @@ static void __init emsym_blurr_board_init(void)
 	if (!IS_ERR(clko))
 		clk_set_parent(clko, clko2);
 
-#ifndef CONFIG_IMX_PCIE
-	/* enable pcie 3v3 power without pcie driver */
-	pcie_3v3_power();
-	mdelay(10);
-	pcie_3v3_reset();
-#endif
 
 	pm_power_off = mx6_snvs_poweroff;
 	imx6q_add_busfreq();
