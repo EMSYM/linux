@@ -64,13 +64,23 @@
 			vin-supply = <&swbst_reg>;
 		};
 
-		reg_audio: regulator@2 {
-			compatible = "regulator-fixed";
-			reg = <2>;
-			regulator-name = "wm8962-supply";
-			gpio = <&gpio4 10 0>;
-			enable-active-high;
-		};
+		reg_2p5v: regulator@2 {
+                        compatible = "regulator-fixed";
+                        reg = <2>;
+                        regulator-name = "2P5V";
+                        regulator-min-microvolt = <2500000>;
+                        regulator-max-microvolt = <2500000>;
+                        regulator-always-on;
+                };
+
+                reg_3p3v: regulator@5 {
+                        compatible = "regulator-fixed";
+                        reg = <5>;
+                        regulator-name = "3P3V";
+                        regulator-min-microvolt = <3300000>;
+                        regulator-max-microvolt = <3300000>;
+                        regulator-always-on;
+                };
 
 		reg_pcie: regulator@3 {
 			compatible = "regulator-fixed";
@@ -136,6 +146,17 @@
 		model = "imx-audio-hdmi";
 		hdmi-controller = <&hdmi_audio>;
 	};
+
+        sound {
+                compatible = "fsl,imx6q-blurr-sgtl5000",
+                             "fsl,imx-audio-sgtl5000";
+                model = "imx6q-blurr-sgtl5000";
+                ssi-controller = <&ssi1>;
+                audio-codec = <&codec>;
+                audio-routing = "Headphone Jack", "HP_OUT";
+                mux-int-port = <1>;
+                mux-ext-port = <3>;
+        };
 
 	mxcfb1: fb@0 {
 		compatible = "fsl,mxc_sdc_fb";
@@ -303,28 +324,14 @@
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
 
-	codec: wm8962@1a {
-		compatible = "wlf,wm8962";
-		reg = <0x1a>;
-		clocks = <&clks IMX6QDL_CLK_CKO>;
-		DCVDD-supply = <&reg_audio>;
-		DBVDD-supply = <&reg_audio>;
-		AVDD-supply = <&reg_audio>;
-		CPVDD-supply = <&reg_audio>;
-		MICVDD-supply = <&reg_audio>;
-		PLLVDD-supply = <&reg_audio>;
-		SPKVDD1-supply = <&reg_audio>;
-		SPKVDD2-supply = <&reg_audio>;
-		gpio-cfg = <
-			0x0000 /* 0:Default */
-			0x0000 /* 1:Default */
-			0x0013 /* 2:FN_DMICCLK */
-			0x0000 /* 3:Default */
-			0x8014 /* 4:FN_DMICCDAT */
-			0x0000 /* 5:Default */
-		>;
-		amic-mono;
-       };
+        codec: sgtl5000@0a { 
+                compatible = "fsl,sgtl5000";
+                reg = <0x0a>;
+                clocks = <&clks 201>;
+                VDDA-supply = <&reg_2p5v>;
+                VDDIO-supply = <&reg_3p3v>;
+        };
+
 };
 
 &i2c2 {
@@ -821,7 +828,13 @@
 	status = "okay";
 };
 
-&ssi2 {
+&audmux {
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_audmux>;
+        status = "okay";
+};
+
+&ssi1 {
 	status = "okay";
 };
 
