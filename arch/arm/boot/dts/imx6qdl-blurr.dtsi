@@ -263,14 +263,6 @@
 	fsl,ldb-di1-parent = <&clks IMX6QDL_CLK_PLL2_PFD0_352M>;
 };
 
-&ecspi1 {
-	fsl,spi-num-chipselects = <1>;
-	cs-gpios = <&gpio4 9 0>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_ecspi1>;
-	status = "okay";
-};
-
 &fec {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_enet>;
@@ -499,15 +491,6 @@
 			>;
 		};
 
-		pinctrl_ecspi1: ecspi1grp {
-			fsl,pins = <
-				MX6QDL_PAD_KEY_COL1__ECSPI1_MISO	0x100b1
-				MX6QDL_PAD_KEY_ROW0__ECSPI1_MOSI	0x100b1
-				MX6QDL_PAD_KEY_COL0__ECSPI1_SCLK	0x100b1
-				MX6QDL_PAD_KEY_ROW1__GPIO4_IO09		0x1b0b0
-			>;
-		};
-
 		pinctrl_i2c3_egalax_int: egalax_i2c3_intgrp {
 			fsl,pins = <
 				MX6QDL_PAD_EIM_CS0__GPIO2_IO23 0x80000000
@@ -660,6 +643,14 @@
 				MX6QDL_PAD_CSI0_DAT11__UART1_RX_DATA	0x1b0b1
 			>;
 		};
+
+		pinctrl_uart4_1: uart4grp-1 {
+			fsl,pins = <
+				MX6QDL_PAD_KEY_COL0__UART4_TX_DATA	0x1b0b1
+				MX6QDL_PAD_KEY_ROW0__UART4_RX_DATA	0x1b0b1
+			>;
+		};
+
 
 		pinctrl_uart5_1: uart5grp-1 {
 			fsl,pins = <
@@ -841,6 +832,12 @@
 &uart1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1>;
+	status = "okay";
+};
+
+&uart4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart4_1>;
 	status = "okay";
 };
 
