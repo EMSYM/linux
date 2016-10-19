@@ -12,7 +12,7 @@
 #include "imx6qdl-blurr.dtsi"
 
 / {
-	model = "Blurr powered by EMSYM";
+	model = "T-Scale based on the Blurr powered by EMSYM";
 	compatible = "fsl,imx6dl-sabresd", "fsl,imx6dl";
 };
 
