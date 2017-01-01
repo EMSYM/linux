@@ -17,6 +17,8 @@
 };
 
 &ldb {
+	status = "okay";
+	split-mode;
 	lvds-channel@0 {
 		crtc = "ipu1-di0";
 	};
