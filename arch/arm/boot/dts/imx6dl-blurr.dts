@@ -14,10 +14,38 @@
 / {
 	model = "Blurr powered by EMSYM";
 	compatible = "fsl,imx6dl-sabresd", "fsl,imx6dl";
+
+        sound {
+                compatible = "fsl,imx6q-blurr-sgtl5000",
+                             "fsl,imx-audio-sgtl5000";
+                model = "imx6q-blurr-sgtl5000";
+                ssi-controller = <&ssi1>;
+                audio-codec = <&codec>;
+                audio-routing = "Headphone Jack", "HP_OUT";
+                mux-int-port = <1>;
+                mux-ext-port = <3>;
+        };
+
 };
 
 &uart1 {
 	status = "okay";
+};
+
+&i2c1 {
+        clock-frequency = <100000>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_i2c1>;
+        status = "okay";
+
+        codec: sgtl5000@0a {
+                compatible = "fsl,sgtl5000";
+                reg = <0x0a>;
+                clocks = <&clks 201>;
+                VDDA-supply = <&reg_2p5v>;
+                VDDIO-supply = <&reg_3p3v>;
+        };
+
 };
 
 &ldb {
