@@ -16,6 +16,10 @@
 	compatible = "fsl,imx6dl-sabresd", "fsl,imx6dl";
 };
 
+&uart1 {
+	status = "okay";
+};
+
 &ldb {
 	status = "okay";
 
