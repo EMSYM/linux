@@ -108,7 +108,7 @@
 		compatible = "gpio-keys";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio_keys>;
-
+		status = "disabled";
 		power {
 			label = "Power Button";
 			gpios = <&gpio3 29 GPIO_ACTIVE_LOW>;
